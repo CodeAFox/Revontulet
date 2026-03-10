@@ -6,6 +6,7 @@
 3. How frequently should I log things?
 4. How can I make the character interact with the map?
 5. Heck. I haven't yet figured out how to add Unity projects to GitHub.
+6. Language considerations: Do I want this to be in English or in a format that everyone could understand?
 
 ### Summary and thoughts
 My goal for today was to add a basic background, a sprite with at least one animation and the ability to move that sprite. I'm happy to report, all of these were succesfully met!
@@ -40,3 +41,4 @@ After I added this, my player character started moving normally which I was quit
 4. I must come up with the concept for the tutorial level's puzzle.
 5. I need to look up how Unity works with GitHub. (I already have a video lined up, but I actually need to watch it too.)
 6. Add sources to the assets that I've used so far.
+7. Add camera movement.
