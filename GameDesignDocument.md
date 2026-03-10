@@ -22,3 +22,7 @@ A level would be in a closed off, area where the player cannot move forward unti
 
 #### Assets
 Models, for now, will be placeholders, meaning I'll have to find some at least somewhat fitting pieces. As for sound design, I would like to include some softer background music as that would definitely add to the cozyness of the game. The sound of crackling snow and such will also need to be added as sound effects, and perhaps some fox laughs too.
+
+
+### Milestones
+1. I'd like to have at least an introduction level with a pause menu, with basic mechanics. Nothing too advanced, just testing the waters for now. I'd also like to have created the sprite for the player with one walking and one idle animation. (Reasons as to why can be found in DevLog's first update, but simply put, I could not find a free fox asset.)
