@@ -35,10 +35,20 @@ void FixedUpdate()
 After I added this, my player character started moving normally which I was quite happy about.
 
 ### Next steps
-1. I need to add a transition animation from idle to walking.
-2. I need to turn the player sprite when it's moving the opposite direction (moonwalking is cool, don't get me wrong, but it does not fit the vibe of the game).
-3. I need to organize and rename some files and folders. It's currently a bit of a mess.
-4. I must come up with the concept for the tutorial level's puzzle.
-5. I need to look up how Unity works with GitHub. (I already have a video lined up, but I actually need to watch it too.)
-6. Add sources to the assets that I've used so far.
-7. Add camera movement.
+- [ ] I need to add a transition animation from idle to walking.
+- [ ] I need to turn the player sprite when it's moving the opposite direction (moonwalking is cool, don't get me wrong, but it does not fit the vibe of the game).
+- [ ] I need to organize and rename some files and folders. It's currently a bit of a mess.
+- [ ] I must come up with the concept for the tutorial level's puzzle.
+- [ ] I need to look up how Unity works with GitHub. (I already have a video lined up, but I actually need to watch it too.)
+- [ ] Add sources to the assets that I've used so far.
+- [ ] Add camera movement.
+
+
+## Update 2026/03/12
+
+### Summary and thoughts
+After watching the video ( https://www.youtube.com/watch?v=xp37Hz1t1Q8 ) wich was provided in class, I had a minor thought that might be worth consideration; In the last update I mentioned that I made the player object kinematic, and the video states that kinematic objects cannot collide with other kinematic objects. I wonder if it would be better to just take away gravity and still use a dynamic object for the player character? Does it make a difference? When is it better to choose a kinematic or a dynamic object? Does the two have computational differences? I'd imagine maybe dynamic ones do, since those ones require Unity (or any other game engine for that matter) to calculate forces acting on them.
+I would like my character to collide and interact with objects on the levels, so I think I should probably change it back to dynamic, just with gravity taken out. I would like to do a bit of research before I change anything however.
+
+### Next steps
+- [ ] Research pros and cons of dynamic and kinematic objects
