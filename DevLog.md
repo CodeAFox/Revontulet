@@ -52,3 +52,8 @@ I would like my character to collide and interact with objects on the levels, so
 
 ### Next steps
 - [ ] Research pros and cons of dynamic and kinematic objects
+
+## Update 2026/03/19
+
+### Summary
+I watched the video https://www.youtube.com/watch?v=eb6kpjjQROE on how to do version control for Unity. I was greatly dissapointed however, as it told me I would have to use Git Desktop. Since I don't really like Git Desktop, I decided I'd try using version control through the command line, and although it did take a bit of time, blood and sweat, I got it working and now, it's up! This isn't much of an update unfortunately, but more is coming very soon. (Tomorrow, if things go smoothly.)
