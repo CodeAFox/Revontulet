@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,7 +7,9 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float movementX;
     private float movementY;
+    private int facingTowards = 1;
 
+    public Animator anim;
     public float speed = 0;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -29,5 +32,24 @@ public class PlayerController : MonoBehaviour
 
         movementX = movementVector.x;
         movementY = movementVector.y;
+
+        AnimateMovement(movementX, movementY);
+    }
+
+    private void AnimateMovement(float horizontal, float vertical)
+    {
+        anim.SetFloat("horizontal", MathF.Abs(horizontal));
+        anim.SetFloat("vertical", MathF.Abs(vertical));
+
+        if(horizontal > 0 && transform.localScale.x < 0 || horizontal < 0 && transform.localScale.x > 0)
+        {
+            Flip();
+        }
+    }
+
+    private void Flip()
+    {
+        facingTowards *= -1;
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
     }
 }
