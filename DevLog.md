@@ -110,3 +110,7 @@ to the Start method. I think it's best there, as I don't really want the player 
 
 Now. Onto the issues. I think I might have to abandon the "cozy puzzle game" that I originally wanted to go with. As much as I hate to admit it, I don't think I'll have enough time to make the game as nice as I would have liked. Plus I have no idea what kind of puzzles I'd put in yet, and that is not a good thing seeing as the semester is already almost over. Is it sad? Yes. But oh well.
 I do have another idea that could be executed, especially with the setup I have now, and the requirements alltogether; I could make a game that involves chasing targets around and collecting them. I could add obstacles that spontaneously appear, movable objects that the character would have to push strategically to trap the targets. And on top of all of this, this would mean that I have to add target AI, as well as a few prefabs for them. I think I am early on enough in the development that this change would not impact my progress by a lot. And it's not the worst idea either.
+
+### Next steps
+- [ ] Update Game Design Document
+- [ ] Add targets to Intro Level
