@@ -1,3 +1,4 @@
+## This document is obsolete, the direction of the game has changed. Please find updated Game Design Document under the name "GameDesignDocument_v2.md"
 # Revontulet 
 ### A puzzle game about how the Northern Lights came to be
 
