@@ -127,3 +127,10 @@ The plan for the intro level is simple; three prefab slime targets, three corres
 - [ ] Add pause screen
 - [ ] Finish up intro level
 - [ ] Get started on next level
+
+
+## Update 2026/04/14
+
+### Summary and Thoughts
+Today I added the sprite sheet for the resting place that the players will have to chase the slimes back to. It's a tiny chest ( https://elthen.itch.io/pixel-art-destructible-objects ). It has a bouncy and opening animation which I think will be perfect for the following; when the chest is empty, it stays still, when the slime gets within range, the chest will open up, and afterwards start bouncing. This would be the perfect indicator to the player whether the resting place is already filled or not.
+I was also thinking that I might add another UI later on. It's basically gonna be the main menu; since we already have to add basic settings, I think this would be very fitting.
