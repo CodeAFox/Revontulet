@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 62703054}
   - component: {fileID: 62703053}
   m_Layer: 0
-  m_Name: Water
+  m_Name: BackgroundObstacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1527,7 +1527,7 @@ GameObject:
   - component: {fileID: 1007689274}
   - component: {fileID: 1007689273}
   m_Layer: 0
-  m_Name: WinterFloor
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
