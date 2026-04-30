@@ -134,3 +134,13 @@ The plan for the intro level is simple; three prefab slime targets, three corres
 ### Summary and Thoughts
 Today I added the sprite sheet for the resting place that the players will have to chase the slimes back to. It's a tiny chest ( https://elthen.itch.io/pixel-art-destructible-objects ). It has a bouncy and opening animation which I think will be perfect for the following; when the chest is empty, it stays still, when the slime gets within range, the chest will open up, and afterwards start bouncing. This would be the perfect indicator to the player whether the resting place is already filled or not.
 I was also thinking that I might add another UI later on. It's basically gonna be the main menu; since we already have to add basic settings, I think this would be very fitting.
+
+## Update 2026/04/30
+
+### Summary and thoughts
+I wanted to finish up the slime's movement today, unfortunately that did not end up happening. I originally tried to add a NavMesh to the grid and an agent to the slime, and set the position to away from the player, but it seems nav mesh doesn't work that well on 2d play areas? Or I messed something up. I will do more research tomorrow, and make the slime move and pop into the chest.
+I did come up with what the next checkpoint for the game could be. I want to add slimes that actively try to avoid the chest. As for the third level (and checkpoint), I want to add obstacles that the player can push around.
+As for the first checkpoint, I will be sure to finish it and and the Dev Post by the end of this week (2026/05/03).
+
+### Next steps
+- [ ] Update Game Design Document
