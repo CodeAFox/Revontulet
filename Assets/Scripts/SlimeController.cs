@@ -16,6 +16,8 @@ public class SlimeController : MonoBehaviour
         slimeRB = GetComponent<Rigidbody2D>();
         slimeRB.MovePosition(SpawnAwayFromPlayer(player, 3));
 
+        transform.GetComponent<Rigidbody2D>().freezeRotation = true;
+
         movement = Random.insideUnitCircle.normalized;
     }
 
