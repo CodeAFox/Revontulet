@@ -32,15 +32,24 @@ public class SlimeController : MonoBehaviour
         if(timer <= 0)
         {
             ChangeMovement();
+            timer = 5;
         }
 
         RunFromPlayer(player);
     }
 
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Border"))
+        {
+            print("collided");
+            ChangeMovement();
+        }
+    }
+
     private void ChangeMovement()
     {
         movement = Random.insideUnitCircle.normalized;
-        timer = 5;
     }
 
     private void RunFromPlayer(Transform player)
