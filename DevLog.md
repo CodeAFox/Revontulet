@@ -113,7 +113,7 @@ I do have another idea that could be executed, especially with the setup I have 
 
 ### Next steps
 - [ ] Update Game Design Document
-- [ ] Add targets to Intro Level
+- [x] Add targets to Intro Level
 
 
 ## Update 2026/04/07
@@ -164,4 +164,40 @@ Another problem that I discovered is that the player character and slime can bot
 
 ### Next steps
 - [ ] Randomize slime movement
-- [ ] Add map border
+- [x] Add map border
+
+## Update 2026/05/07
+
+### Summary and thoughts
+Today was eventful in multiple ways for my game.
+First, I added the functionality, that whenever the player gets too close to the slime, they will start moving away from the player.
+```
+private void RunFromPlayer(Transform player)
+    {
+        Vector2 distance = new Vector2(player.position.x - slimeRB.position.x, player.position.y - slimeRB.position.y);
+
+        if(distance.magnitude < 2)
+        {
+            movement = - distance.normalized;
+        }
+    }
+```
+I will definitely have to do a LOT of refactoring later, as currently the functions and how they interact is all over the place.
+The next thing that I added was a border to the whole map, so that neither the player nor the slime(s) can escape. I put it on a different layer, as unfortunately the tilemap layer that already had colliders was above the base map, so it looked off. But, to also compensate for the weird looking map, whenever the player goes to the edge, I filled out the background tilemap a bit more. I used the layer that has no colliders, so that the game may be a bit less computationally heavy.
+I also added a "Border" tag to the borders, so that I can play with collisions. I originally wanted to add a trigger collider to the borders, but I had to realise that that would take two 2d Colliders on the larger scale, which would not be wise, thus I added the collider to the slime and made that a trigger. I also increased the collider radius to 1 which added some unexpected functionality, but it kinda worked in my favour. It makes the movements of the slime quite a bit more randomized whenever they're near the edge, which I do not mind.
+The code I have so far does not work that well yet however.
+```
+void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.CompareTag("Border"))
+        {
+            print("collided");
+            ChangeMovement();
+        }
+    }
+```
+This triggers once the slime collides with the border, and then nothing. ChangeMovement() gives back a vector that is inside the unit circle in any direction, meaning the direction could be towards the wall too. If that happens? The slime just keeps going towards the wall. Not good.
+If I remember correctly, there was a method for continuous triggers? I think there was one for when it first happens, when it finishes and during the trigger? I'll need to check.
+
+### Next steps
+- [ ] Check trigger function functionality
