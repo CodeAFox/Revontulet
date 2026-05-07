@@ -144,3 +144,24 @@ As for the first checkpoint, I will be sure to finish it and and the Dev Post by
 
 ### Next steps
 - [ ] Update Game Design Document
+
+## Update 2026/05/01
+
+### Summary and thoughts
+Today I added a spawn-in mechanic for the slime as well as randomized movement for them.
+I started off with the spawn mechanic; I wanted them to spawn a specific distance away from the player, not closer not further, so, I used a normalized, randomly generated Vector! I will need to refactor and add this to a parent class later on, because this is not unique behaviour.
+```
+private Vector2 SpawnAwayFromPlayer(Transform player, int magnitude)
+    {
+        Vector2 randVector = Random.insideUnitCircle.normalized * magnitude;
+        return new Vector2(player.position.x + randVector.x, player.position.y + randVector.y);
+    }
+```
+I am trying to lean a bit more towards the functional paradigm, as I think it could do me some good here, but I will need to refactor things heavily once I finally see the bigger picture. Anywho, this is a feature I am quite happy with and proud of.
+
+Next up, I added random movement to the slime, this changed every 5 seconds. I do want to make this more randomized however.
+Another problem that I discovered is that the player character and slime can both go outside the map. Not good; I will need to add some colliders around it and fill it out.
+
+### Next steps
+- [ ] Randomize slime movement
+- [ ] Add map border
