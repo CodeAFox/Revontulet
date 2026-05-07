@@ -1,4 +1,5 @@
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -32,12 +33,24 @@ public class SlimeController : MonoBehaviour
         {
             ChangeMovement();
         }
+
+        RunFromPlayer(player);
     }
 
     private void ChangeMovement()
     {
         movement = Random.insideUnitCircle.normalized;
         timer = 5;
+    }
+
+    private void RunFromPlayer(Transform player)
+    {
+        Vector2 distance = new Vector2(player.position.x - slimeRB.position.x, player.position.y - slimeRB.position.y);
+
+        if(distance.magnitude < 2)
+        {
+            movement = - distance.normalized;
+        }
     }
 
     // Should be moved to a parent class to be used by other enemies too
