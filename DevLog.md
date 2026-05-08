@@ -163,7 +163,7 @@ Next up, I added random movement to the slime, this changed every 5 seconds. I d
 Another problem that I discovered is that the player character and slime can both go outside the map. Not good; I will need to add some colliders around it and fill it out.
 
 ### Next steps
-- [ ] Randomize slime movement
+- [x] Randomize slime movement
 - [x] Add map border
 
 ## Update 2026/05/07
@@ -200,4 +200,21 @@ This triggers once the slime collides with the border, and then nothing. ChangeM
 If I remember correctly, there was a method for continuous triggers? I think there was one for when it first happens, when it finishes and during the trigger? I'll need to check.
 
 ### Next steps
-- [ ] Check trigger function functionality
+- [x] Check trigger function functionality
+
+## Update 2026/05/08
+
+### Summary and thoughts
+
+Today I made a few advancements and the first milestone is getting closer and closer.
+First off, I checked what Trigger functions I could find that would work. I found the OnTriggerStay2D() function, however it made the whole game lag a bit, so I decided against it. Instead, I went with the original function, and made it so that the slime just goes back where it came from.
+```
+movement = - movement;
+```
+A crude solution, yes, but it works.
+I also randomized the timer, so the slime changes directions anywhere between 1 to 5 seconds, making the whole game a bit more unpredictable.
+Finally, I made both the chest and the slime a prefab as there will be a lot of both of them in later levels.
+I will have to think about states a bit more. I think it would be a good idea to add "wandering", "fleeing" and "captured" (aka. disabled) states to the slime, plus the chest also needs an "empty" and a "full" state.
+
+### Next steps
+- [ ] Consider (and add) states to the slime and the chest
