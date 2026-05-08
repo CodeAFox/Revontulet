@@ -32,7 +32,7 @@ public class SlimeController : MonoBehaviour
         if(timer <= 0)
         {
             ChangeMovement();
-            timer = 5;
+            timer = Random.Range(1, 5);
         }
 
         RunFromPlayer(player);
@@ -42,8 +42,7 @@ public class SlimeController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Border"))
         {
-            print("collided");
-            ChangeMovement();
+            movement = -movement;
         }
     }
 
