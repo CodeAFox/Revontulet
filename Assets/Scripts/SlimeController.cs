@@ -44,6 +44,10 @@ public class SlimeController : MonoBehaviour
         {
             movement = -movement;
         }
+        if(collision.gameObject.CompareTag("Chest"))
+        {
+            slimeRB.gameObject.SetActive(false);
+        }
     }
 
     private void ChangeMovement()
