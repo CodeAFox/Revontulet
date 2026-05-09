@@ -218,3 +218,8 @@ I will have to think about states a bit more. I think it would be a good idea to
 
 ### Next steps
 - [ ] Consider (and add) states to the slime and the chest
+
+## Update 2026/05/09
+
+Minor update today, I added the functionality that the slime disappears once it collides with the chest. It just gets disabled.
+Only thing that remains is the pause screen. And refactoring.
