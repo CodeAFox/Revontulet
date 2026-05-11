@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Border
   - Chest
+  - Target
   layers:
   - Default
   - TransparentFX
