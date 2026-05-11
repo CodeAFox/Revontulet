@@ -1620,7 +1620,7 @@ GameObject:
   - component: {fileID: 538492441}
   - component: {fileID: 538492440}
   m_Layer: 5
-  m_Name: Quit
+  m_Name: QuitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27071,7 +27071,7 @@ GameObject:
   - component: {fileID: 1028091497}
   - component: {fileID: 1028091496}
   m_Layer: 5
-  m_Name: Settings
+  m_Name: SettingsButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
