@@ -1,0 +1,17 @@
+using UnityEngine;
+
+public class CameraController : MonoBehaviour
+{
+    public GameObject player;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    void Start()
+    {
+        
+    }
+
+    void LateUpdate()
+    {
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y, -10);
+    }
+}
