@@ -124,8 +124,8 @@ Basically, I thought that it would be nice if you'd have to chase the slimes but
 The plan for the intro level is simple; three prefab slime targets, three corresponding resting places for them to settle in, and around 6 - 8 little boxes for the player to push around. This way, whoever is playing can grasp the basic rules without it being too hard. The slimes should be a bit faster than the player.
 
 ### Next steps
-- [ ] Add pause screen
-- [ ] Finish up intro level
+- [x] Add pause screen
+- [x] Finish up intro level
 - [ ] Get started on next level
 
 
@@ -221,5 +221,22 @@ I will have to think about states a bit more. I think it would be a good idea to
 
 ## Update 2026/05/09
 
+## Summary and thoughts
+
 Minor update today, I added the functionality that the slime disappears once it collides with the chest. It just gets disabled.
 Only thing that remains is the pause screen. And refactoring.
+
+## Update 2026/05/10
+
+### Summary and thoughts
+
+I have officially reached my first milestone! Huzzah!
+Basically, what I did today was at the beginning a few minor fixes. I fixed the slimes' spawning mechanism as I noticed they weren't randomized. 
+```
+ slimeRB.position = SpawnAwayFromPlayer(player, 3);
+```
+Based on the research I did, the movePosition one wasn't working, because the physiscs system most likely hasn't initialised yet.
+Next up, I added the animation to the chests, so that they close and bounce a bit whenever a slime is captured. I made sure to also disable the box collider, so that it doesn't capture more than one slime. This will probably be made a bit prettier when I am refactoring next week, but for now, it's okay.
+I also added two more slimes and chests, to complete the first level's requirements.
+Next up, I had to find out when I was adding the other slimes and chests, that I had NOT been editing theprefab itself, so I had to go back and apply some changes made to the prefab, so that they would behave uniformly.
+Lasly, I added a more or less functional pause screen following a tutorial ( https://www.youtube.com/watch?v=JivuXdrIHK0 ). I did note that this tutorial was not making it keyboard-only friendly, so I looked up a different one ( https://www.youtube.com/watch?v=SXBgBmUcTe0 ) to fix that as well. But other than that, the pause menu has a functional resume button and a (hopefully) functional quit button.
