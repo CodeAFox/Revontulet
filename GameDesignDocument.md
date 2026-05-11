@@ -25,4 +25,9 @@ Models, for now, will be placeholders, meaning I'll have to find some at least s
 
 
 ### Milestones
-1. I'd like to have at least an introduction level with a pause menu, with basic mechanics. Nothing too advanced, just testing the waters for now. I'd also like to have created the sprite for the player with one walking and one idle animation. (Reasons as to why can be found in DevLog's first update, but simply put, I could not find a free fox asset.)
+1. I'd like to have at least an introduction level with a pause menu, with basic mechanics. Nothing too advanced, just testing the waters for now. I'd also like to have created the sprite for the player with one walking and one idle animation. (Reasons as to why can be found in DevLog's first update, but simply put, I could not find a free fox asset.) 
+Basic mechanics include having 3 slimes and 3 chests; the slimes can be chased around by the player and upon entering the chest they are "captured". One chest can only contain one slime.
+Additionally, the game should have a pause menu with at least a functional resume button.
+
+2. The second milestone includes a 2nd level. This level should have some of the basic targets, while also introducing a new variant to the basic slime target. This should be a bit faster and should actively try to avoid the chests. To compensate for this added difficulty, the level should have movable objects (only movable by the player) so that the player can force and push the slimes into the chests. Furthermore sounds should be added, the very least some relaxing background music.
+Lastly, the code should be optimized and refactored for this milestone to be considered "completed".
