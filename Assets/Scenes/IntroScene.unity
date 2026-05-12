@@ -29763,7 +29763,7 @@ PrefabInstance:
     - target: {fileID: 4233130652615720219, guid: 804e31c488494414b8954b3c75f6cfd5, type: 3}
       propertyPath: anim
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1356939109}
     - target: {fileID: 6007030994339839615, guid: 804e31c488494414b8954b3c75f6cfd5, type: 3}
       propertyPath: m_Name
       value: Chest1
