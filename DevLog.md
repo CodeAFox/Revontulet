@@ -112,7 +112,7 @@ Now. Onto the issues. I think I might have to abandon the "cozy puzzle game" tha
 I do have another idea that could be executed, especially with the setup I have now, and the requirements alltogether; I could make a game that involves chasing targets around and collecting them. I could add obstacles that spontaneously appear, movable objects that the character would have to push strategically to trap the targets. And on top of all of this, this would mean that I have to add target AI, as well as a few prefabs for them. I think I am early on enough in the development that this change would not impact my progress by a lot. And it's not the worst idea either.
 
 ### Next steps
-- [ ] Update Game Design Document
+- [x] Update Game Design Document
 - [x] Add targets to Intro Level
 
 
@@ -143,7 +143,7 @@ I did come up with what the next checkpoint for the game could be. I want to add
 As for the first checkpoint, I will be sure to finish it and and the Dev Post by the end of this week (2026/05/03).
 
 ### Next steps
-- [ ] Update Game Design Document
+- [x] Update Game Design Document
 
 ## Update 2026/05/01
 
@@ -240,3 +240,14 @@ Next up, I added the animation to the chests, so that they close and bounce a bi
 I also added two more slimes and chests, to complete the first level's requirements.
 Next up, I had to find out when I was adding the other slimes and chests, that I had NOT been editing theprefab itself, so I had to go back and apply some changes made to the prefab, so that they would behave uniformly.
 Lasly, I added a more or less functional pause screen following a tutorial ( https://www.youtube.com/watch?v=JivuXdrIHK0 ). I did note that this tutorial was not making it keyboard-only friendly, so I looked up a different one ( https://www.youtube.com/watch?v=SXBgBmUcTe0 ) to fix that as well. But other than that, the pause menu has a functional resume button and a (hopefully) functional quit button.
+
+## Update 2026/05/12
+
+### Summary and thoughts
+
+I started refactoring today. Not much yet unfortunately, but it's alright.
+I made a State Machine for the Chests, so now they have two distinct behaviours: empty and full.
+I originally wanted to make the chests and slimes into an observer pattern, however, I had to realise that if all slimes were to receive the event of "SlimeCaptured" at the same time, that would not be too good, so I just kept it as is for now.
+
+### Next stepts
+- [ ] Break up player and slime controller
