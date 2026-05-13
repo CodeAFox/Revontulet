@@ -7,15 +7,19 @@ public class SlimeController : MonoBehaviour
 {
     public Transform player;
     public float speed = 1;
+    public Animator anim;
     private Rigidbody2D slimeRB;
     private Vector2 movement;
     private float timer;
+    private MovementAnimator animationLogic;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         slimeRB = GetComponent<Rigidbody2D>();
         slimeRB.position = SpawnAwayFromPlayer(player, 3);
+
+        animationLogic = new MovementAnimator(anim, slimeRB.gameObject);
 
         transform.GetComponent<Rigidbody2D>().freezeRotation = true;
 
@@ -36,6 +40,8 @@ public class SlimeController : MonoBehaviour
         }
 
         RunFromPlayer(player);
+
+        animationLogic.AnimateMovement(movement.x, movement.y);
     }
 
     void OnTriggerEnter2D(Collider2D collision)

@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private float movementX;
     private float movementY;
-    private int facingTowards = 1;
+    private MovementAnimator animationLogic;
 
     public Animator anim;
     public float speed = 0;
@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         transform.GetComponent<Rigidbody2D>().freezeRotation = true;
+
+        animationLogic = new MovementAnimator(anim, rb.gameObject);
     }
 
     // Update is called once per frame
@@ -34,23 +36,7 @@ public class PlayerController : MonoBehaviour
         movementX = movementVector.x;
         movementY = movementVector.y;
 
-        AnimateMovement(movementX, movementY);
-    }
-
-    private void AnimateMovement(float horizontal, float vertical)
-    {
-        anim.SetFloat("horizontal", MathF.Abs(horizontal));
-        anim.SetFloat("vertical", MathF.Abs(vertical));
-
-        if(horizontal > 0 && transform.localScale.x < 0 || horizontal < 0 && transform.localScale.x > 0)
-        {
-            Flip();
-        }
-    }
-
-    private void Flip()
-    {
-        facingTowards *= -1;
-        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        animationLogic.AnimateMovement(movementX, movementY);
+        //AnimateMovement(movementX, movementY);
     }
 }
