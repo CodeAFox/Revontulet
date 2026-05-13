@@ -8,70 +8,51 @@ public class SlimeController : MonoBehaviour
     public Transform player;
     public float speed = 1;
     public Animator anim;
-    private Rigidbody2D slimeRB;
-    private Vector2 movement;
-    private float timer;
-    private MovementAnimator animationLogic;
+    public Rigidbody2D slimeRB {get; private set;}
+    public MovementAnimator animationLogic {get; private set;}
+    private ISlimeState state;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         slimeRB = GetComponent<Rigidbody2D>();
+         
         slimeRB.position = SpawnAwayFromPlayer(player, 3);
-
-        animationLogic = new MovementAnimator(anim, slimeRB.gameObject);
-
         transform.GetComponent<Rigidbody2D>().freezeRotation = true;
 
-        movement = Random.insideUnitCircle.normalized;
+        animationLogic = new MovementAnimator(anim, slimeRB.gameObject);
+        state = new WanderingSlimeState(this);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        timer -= Time.deltaTime;
-        
-        slimeRB.MovePosition(slimeRB.position + movement * speed * Time.fixedDeltaTime);
-
-        if(timer <= 0)
-        {
-            ChangeMovement();
-            timer = Random.Range(1, 5);
-        }
-
-        RunFromPlayer(player);
-
-        animationLogic.AnimateMovement(movement.x, movement.y);
+        state.InteractWithPlayer();
+        state.Move();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Border"))
         {
-            movement = -movement;
+            state.Collision();
         }
         if(collision.gameObject.CompareTag("Chest"))
         {
-            slimeRB.gameObject.SetActive(false);
+            state.Captured();
         }
     }
 
-    private void ChangeMovement()
+    public Vector2 GetDistanceFromPlayer()
     {
-        movement = Random.insideUnitCircle.normalized;
+        return new Vector2(player.position.x - slimeRB.position.x, player.position.y - slimeRB.position.y);
     }
 
-    private void RunFromPlayer(Transform player)
+    public void ChangeState(ISlimeState state)
     {
-        Vector2 distance = new Vector2(player.position.x - slimeRB.position.x, player.position.y - slimeRB.position.y);
-
-        if(distance.magnitude < 2)
-        {
-            movement = - distance.normalized;
-        }
+        this.state = state;
     }
 
-    // Should be moved to a parent class to be used by other enemies too
     private Vector2 SpawnAwayFromPlayer(Transform player, int magnitude)
     {
         Vector2 randVector = Random.insideUnitCircle.normalized * magnitude;

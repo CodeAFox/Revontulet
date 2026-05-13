@@ -25,7 +25,6 @@ public class MovementAnimator
 
     private void Flip()
     {
-        Debug.Log("Flip happened");
         facingTowards *= -1;
         gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x * -1, gameObject.transform.localScale.y, gameObject.transform.localScale.z);
     }
