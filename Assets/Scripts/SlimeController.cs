@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -10,6 +11,7 @@ public class SlimeController : MonoBehaviour
     public Animator anim;
     public Rigidbody2D slimeRB {get; private set;}
     public MovementAnimator animationLogic {get; private set;}
+    public event Action SlimeCaptured;
     private ISlimeState state;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -39,6 +41,7 @@ public class SlimeController : MonoBehaviour
         }
         if(collision.gameObject.CompareTag("Chest"))
         {
+            SlimeCaptured?.Invoke();
             state.Captured();
         }
     }
@@ -55,7 +58,7 @@ public class SlimeController : MonoBehaviour
 
     private Vector2 SpawnAwayFromPlayer(Transform player, int magnitude)
     {
-        Vector2 randVector = Random.insideUnitCircle.normalized * magnitude;
+        Vector2 randVector = UnityEngine.Random.insideUnitCircle.normalized * magnitude;
         return new Vector2(player.position.x + randVector.x, player.position.y + randVector.y);
     }
 }
