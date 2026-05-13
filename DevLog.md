@@ -250,4 +250,76 @@ I made a State Machine for the Chests, so now they have two distinct behaviours:
 I originally wanted to make the chests and slimes into an observer pattern, however, I had to realise that if all slimes were to receive the event of "SlimeCaptured" at the same time, that would not be too good, so I just kept it as is for now.
 
 ### Next stepts
-- [ ] Break up player and slime controller
+- [x] Break up player and slime controller
+
+
+## Update 2026/05/13
+
+### Summary and thoughts
+
+Today I finished refactoring.
+First important thing I did, was separate the Animated parts off of the PlayerController, and move them into a different class called MovementAnimator.cs. This class is responsible for the turn animation that both the slime and the player have, so I added it to both.
+Simply put, in the constructor of the class, I give reference to the calling object, and its animator, allowing a separation of responsibilities for the Controller and the Animator.
+```
+public MovementAnimator(Animator anim, GameObject objectToAnimate)
+    {
+        this.anim = anim;
+        gameObject = objectToAnimate;
+    }
+```
+From the Controllers, I call the methods of the animator normally whenever needed;
+```
+void OnMove(InputValue movementValue)
+    {
+        Vector2 movementVector = movementValue.Get<Vector2>();
+
+        movementX = movementVector.x;
+        movementY = movementVector.y;
+
+        animationLogic.AnimateMovement(movementX, movementY);
+    }
+```
+
+Next thing I did was make the SlimeController a few states, these being fleeing and wandering. I had to realise that as of now "captured" is not exaclty a valid state as the game object just gets disabled.
+The part I like the most is how much I managed to cut the code down in the controller, take the FixedUpdate method for example;
+```
+void FixedUpdate()
+    {
+        state.InteractWithPlayer();
+        state.Move();
+    }
+```
+That's it. It's so beautifully simple, as the State Machine takes care of any other thing going on in the background.
+```
+public void Move()
+    {
+        if(timer <= 0)
+        {
+            movement = Random.insideUnitCircle.normalized;
+            timer = Random.Range(1, 5);
+        }
+
+        timer -= Time.deltaTime;
+
+        context.slimeRB.MovePosition(context.slimeRB.position + movement * context.speed * Time.fixedDeltaTime);
+        context.animationLogic.AnimateMovement(movement.x, movement.y);
+    }
+```
+In addition, I did a little fun thing.
+Previously, the slime would escape in the exact opposite direction it came from when it bounced back from the walls. Now, because I wanted to make it a bit different per states, I made it so that when the slime is in a fleeing state, it does what was previously stated, but if not, it just starts going in th direction where the player is currently at.
+When wandering:
+```
+public void Collision()
+    {
+        movement = context.GetDistanceFromPlayer().normalized;
+    }
+```
+And when fleeing:
+```
+public void Collision()
+    {
+        movement = -movement;
+    }
+```
+
+Lastly, I started working on the next level. For ease of transfer I actually made a lot of the first scene into prefabs. I am unsure if that was a wise decision or not, but we shall see.
