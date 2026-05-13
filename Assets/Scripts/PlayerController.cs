@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    private Rigidbody2D player;
     private float movementX;
     private float movementY;
     private MovementAnimator animationLogic;
@@ -15,18 +15,19 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
+        player = GetComponent<Rigidbody2D>();
+        
         transform.GetComponent<Rigidbody2D>().freezeRotation = true;
-
-        animationLogic = new MovementAnimator(anim, rb.gameObject);
+        animationLogic = new MovementAnimator(anim, player.gameObject);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        Vector2 movement = new Vector2(movementX, movementY);
-
-        rb.MovePosition(rb.position + movement * speed * Time.fixedDeltaTime);
+        player.MovePosition(
+            player.position + 
+            new Vector2(movementX, movementY) * 
+            speed * Time.fixedDeltaTime);
     }
 
     void OnMove(InputValue movementValue)
@@ -37,6 +38,5 @@ public class PlayerController : MonoBehaviour
         movementY = movementVector.y;
 
         animationLogic.AnimateMovement(movementX, movementY);
-        //AnimateMovement(movementX, movementY);
     }
 }
