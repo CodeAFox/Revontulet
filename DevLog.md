@@ -323,3 +323,11 @@ public void Collision()
 ```
 
 Lastly, I started working on the next level. For ease of transfer I actually made a lot of the first scene into prefabs. I am unsure if that was a wise decision or not, but we shall see.
+
+## Update 2026/05/15
+
+### Summary and thoughts
+No push yer today, but I did do a few things. First, I reverted my prefabs, because I read that you can persist Game Objects using DontDestroyOnLoad, so I am trying that one.
+I added another panel for the ContinueGame screen, not yet functional.
+What I am currently suffering with is trying to get the eventlistener functioning for the SlimeController and GameManager as I want the game to automatically activate the "Continue to next level?" screen once all slimes are captured.
+The singleton pattern is not yet working and I am not yet sure how to fix it. I'm trying with a SriptableObject as a sub-component. Hopefully that will work, but I am not yet sure.
