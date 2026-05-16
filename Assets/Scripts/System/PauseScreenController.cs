@@ -7,7 +7,7 @@ public class PauseScreenController : MonoBehaviour
     public static bool paused = false;
     public GameObject pauseScreen;
 
-    public GameObject resumeButton;
+    public GameObject firstSelected;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -38,7 +38,7 @@ public class PauseScreenController : MonoBehaviour
         paused = true;
 
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(resumeButton);
+        EventSystem.current.SetSelectedGameObject(firstSelected);
     }
 
     public void Resume()
@@ -55,6 +55,6 @@ public class PauseScreenController : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        GameManager.QuitGame();
     }
 }
