@@ -1,13 +1,11 @@
 using System.Linq;
 using System.Threading.Tasks;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    private int slimesInCurrentLevel;
-    
-    public GameObject continueScreen;
-
     public static bool paused = false;
 
     private void Awake()
@@ -17,16 +15,12 @@ public class GameManager : MonoBehaviour
 
     public void Start()
     {
+        //continueScreenController = GetComponent<MonoScript>();
     }
 
     public void LateUpdate()
     {
-        GetNumOfActiveSlimesOnLevel();
-        if(slimesInCurrentLevel <= 0)
-        {
-            continueScreen.SetActive(true);
-            Pause();
-        }
+        
     }
 
     public static void QuitGame()
@@ -46,12 +40,17 @@ public class GameManager : MonoBehaviour
         paused = false;
     }
 
-    private void GetNumOfActiveSlimesOnLevel()
+    public static int GetNumOfActiveSlimesOnLevel()
     {
-        //slimesInCurrentLevel = GameObject.FindGameObjectsWithTag("Target").Length;
-         slimesInCurrentLevel = GameObject.FindGameObjectsWithTag("Target")
+         return GameObject.FindGameObjectsWithTag("Target")
             .ToList<GameObject>()
             .Where(target => target.activeSelf)
             .Count();
+    }
+
+    public static Scene GetNextLevel()
+    {
+        //Throws an error as it only returns one scene????
+        return SceneManager.GetSceneAt(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }

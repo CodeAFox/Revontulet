@@ -26198,6 +26198,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   firstSelected: {fileID: 1239717942}
+  continueScreen: {fileID: 686024204}
 --- !u!1 &902716936
 GameObject:
   m_ObjectHideFlags: 0
@@ -27757,7 +27758,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7395ef0227baf394b8ebca39e9051c98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  continueScreen: {fileID: 686024204}
 --- !u!4 &1073902375
 Transform:
   m_ObjectHideFlags: 0
