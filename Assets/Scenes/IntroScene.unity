@@ -26121,7 +26121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   pauseScreen: {fileID: 2136364331}
-  firstSelected: {fileID: 0}
+  firstSelected: {fileID: 2061692832}
 --- !u!114 &869614718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26197,7 +26197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2afffaed588c2d647aded542bc66e72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  firstSelected: {fileID: 0}
+  firstSelected: {fileID: 1239717942}
 --- !u!1 &902716936
 GameObject:
   m_ObjectHideFlags: 0
