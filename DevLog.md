@@ -331,3 +331,29 @@ No push yer today, but I did do a few things. First, I reverted my prefabs, beca
 I added another panel for the ContinueGame screen, not yet functional.
 What I am currently suffering with is trying to get the eventlistener functioning for the SlimeController and GameManager as I want the game to automatically activate the "Continue to next level?" screen once all slimes are captured.
 The singleton pattern is not yet working and I am not yet sure how to fix it. I'm trying with a SriptableObject as a sub-component. Hopefully that will work, but I am not yet sure.
+
+## Update 2026/05/16
+
+### Summary and thoughts
+Today I made the ContinueScreen pop up. As I was thinking I realised I don't really need the Observer pattern for this, so I went with the simpler, albeit probably a bit less nicer approach; I check the number of slimes inside the ContinueScreenController in a LateUpdate.
+```
+void LateUpdate()
+    {
+        int  slimesInCurrentLevel = GameManager.GetNumOfActiveSlimesOnLevel();
+        if(slimesInCurrentLevel <= 0)
+        {
+            ActivateContinueScreen();
+        }
+    }
+```
+I chose LateUpdate, because I want to make sure that it appears after all slimes are caught. I know that would probably be the case anyways, but this made more sense to me.
+
+Currently, there are two iisues. When I try to get the next level (Scene) using SceneManager, it seems it only returns the current active scene which is not optimal.
+```
+public static Scene GetNextLevel()
+    {
+        //Throws an error as it only returns one scene????
+        return SceneManager.GetSceneAt(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+```
+And secondly, for some reason the ContinueScreen, while selects the first button (being the Continue one), but does not seem like it allows that to be changed. I am not yet sure why, I will have to revisit the tutorial and see if there was any steps I missed.
