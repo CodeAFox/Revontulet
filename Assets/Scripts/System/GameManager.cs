@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEditor;
@@ -10,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        //DontDestroyOnLoad(gameObject);
     }
 
     public void Start()
@@ -48,9 +50,12 @@ public class GameManager : MonoBehaviour
             .Count();
     }
 
-    public static Scene GetNextLevel()
+    public static string GetNextLevel()
     {
-        //Throws an error as it only returns one scene????
-        return SceneManager.GetSceneAt(SceneManager.GetActiveScene().buildIndex + 1);
+        List<string> scenes = EditorBuildSettings.scenes.Where(scene => scene.enabled).Select(scene => scene.path).ToList();
+
+        int currentScene = scenes.FindIndex(scene => scene.Equals("Assets/Scenes/" + SceneManager.GetActiveScene().name + ".unity"));
+
+        return scenes[scenes.Count == currentScene ++ ? currentScene : currentScene ++];
     }
 }

@@ -41,6 +41,6 @@ public class ContinueScreenController : MonoBehaviour
     public void ContinueToNextLevel()
     {
         //First button gets selected, but another cannot be chosen afterwards
-        SceneManager.SetActiveScene(GameManager.GetNextLevel() == null ? SceneManager.GetActiveScene() : GameManager.GetNextLevel());
+        SceneManager.LoadScene("SecondLevel", LoadSceneMode.Single);
     }
 }
