@@ -357,3 +357,43 @@ public static Scene GetNextLevel()
     }
 ```
 And secondly, for some reason the ContinueScreen, while selects the first button (being the Continue one), but does not seem like it allows that to be changed. I am not yet sure why, I will have to revisit the tutorial and see if there was any steps I missed.
+
+## Update 2026/05/17
+
+### Summary and thoughts
+
+So, I fixed the two previous problems! One of them was less obvious than the other.
+About the scene switching; since SceneManager only returned one when I was requesting all scenes, I had to turn to EditorBuildSettings to get the scene paths.
+```
+public static string GetNextLevel()
+    {
+        List<string> scenes = EditorBuildSettings.scenes.Where(scene => scene.enabled).Select(scene => scene.path).ToList();
+
+        int currentScene = scenes.FindIndex(scene => scene.Equals("Assets/Scenes/" + SceneManager.GetActiveScene().name + ".unity"));
+
+        return scenes[scenes.Count == currentScene ++ ? currentScene : currentScene ++];
+    }
+```
+I just call this from ContinueScreenController and load  the next scene.
+As for the "cannot select other button" issue... I was just a bit silly. I kept reselecting it in the LateUpdate method, so now in the if statement, I also check if the game is paused or not already.
+```
+void LateUpdate()
+    {
+        int  slimesInCurrentLevel = GameManager.GetNumOfActiveSlimesOnLevel();
+        if(slimesInCurrentLevel <= 0 && !GameManager.paused)
+        {
+            ActivateContinueScreen();
+        }
+    }
+```
+
+Last thing I did today was create a Rule Tile and make a very basic base map.
+To get a feeling and understanding for how rule tiles work, I did have to follow a tutorial ( https://www.youtube.com/watch?v=rC55Q7p90qs ) as I got very confused, but I did figure it out!
+One thing that I am a bit sad about is that I could not add variety. I originally wanted to add the trees as a varied version of the mid-tiles, but when I tried doing that, the trees were not overlaying and just had a small transparent hole, which is not pretty. But oh well, it is what it is. I might try animating the tree a tiny bit (just bouncing / swaying) to demonstrate a bit of understanding of the mechanic.
+
+### Next stepts
+- [ ] Animate trees?
+- [ ] Finish tilemap
+- [ ] Add slimes & chests
+- [ ] Make new slime variant
+- [ ] Add pushable objects
