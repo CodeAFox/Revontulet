@@ -357,3 +357,50 @@ public static Scene GetNextLevel()
     }
 ```
 And secondly, for some reason the ContinueScreen, while selects the first button (being the Continue one), but does not seem like it allows that to be changed. I am not yet sure why, I will have to revisit the tutorial and see if there was any steps I missed.
+
+## Update 2026/05/17
+
+### Summary and thoughts
+
+So, I fixed the two previous problems! One of them was less obvious than the other.
+About the scene switching; since SceneManager only returned one when I was requesting all scenes, I had to turn to EditorBuildSettings to get the scene paths.
+```
+public static string GetNextLevel()
+    {
+        List<string> scenes = EditorBuildSettings.scenes.Where(scene => scene.enabled).Select(scene => scene.path).ToList();
+
+        int currentScene = scenes.FindIndex(scene => scene.Equals("Assets/Scenes/" + SceneManager.GetActiveScene().name + ".unity"));
+
+        return scenes[scenes.Count == currentScene ++ ? currentScene : currentScene ++];
+    }
+```
+I just call this from ContinueScreenController and load  the next scene.
+As for the "cannot select other button" issue... I was just a bit silly. I kept reselecting it in the LateUpdate method, so now in the if statement, I also check if the game is paused or not already.
+```
+void LateUpdate()
+    {
+        int  slimesInCurrentLevel = GameManager.GetNumOfActiveSlimesOnLevel();
+        if(slimesInCurrentLevel <= 0 && !GameManager.paused)
+        {
+            ActivateContinueScreen();
+        }
+    }
+```
+
+Last thing I did today was create a Rule Tile and make a very basic base map.
+To get a feeling and understanding for how rule tiles work, I did have to follow a tutorial ( https://www.youtube.com/watch?v=rC55Q7p90qs ) as I got very confused, but I did figure it out!
+One thing that I am a bit sad about is that I could not add variety. I originally wanted to add the trees as a varied version of the mid-tiles, but when I tried doing that, the trees were not overlaying and just had a small transparent hole, which is not pretty. But oh well, it is what it is.
+
+### Next stepts
+- [ ] Finish tilemap
+- [ ] Add slimes & chests
+- [ ] Make new slime variant
+- [ ] Add pushable objects
+
+
+## Update 2026/05/18
+
+### Summary and thoughts
+Today I finished the tilemap for the second level. I added the same as I did for the first; trees as decor, water as a bit of variety for the background navigability and borders. The only thing I did differently is that I cheated a tiny bit. In the previous level, when I was working on the borders, I added extra tiles to make sure that the background doesn't seem off. This time I just changed the camera's background colour. 
+Secondly, I started work on my second slime variant; the "aware" speedy slime. I created an enum first and foremost for the slime types and then I coloured over it a bit using Unity's inspector to make it a different colour.
+I haven't figured out how to implement the "avoids chests" mechanic yet.
