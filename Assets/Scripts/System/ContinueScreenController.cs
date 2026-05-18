@@ -17,7 +17,7 @@ public class ContinueScreenController : MonoBehaviour
     void LateUpdate()
     {
         int  slimesInCurrentLevel = GameManager.GetNumOfActiveSlimesOnLevel();
-        if(slimesInCurrentLevel <= 0)
+        if(slimesInCurrentLevel <= 0 && !GameManager.paused)
         {
             ActivateContinueScreen();
         }
@@ -40,7 +40,6 @@ public class ContinueScreenController : MonoBehaviour
 
     public void ContinueToNextLevel()
     {
-        //First button gets selected, but another cannot be chosen afterwards
         SceneManager.LoadScene("SecondLevel", LoadSceneMode.Single);
     }
 }

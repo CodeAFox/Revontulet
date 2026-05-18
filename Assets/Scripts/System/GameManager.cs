@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -10,14 +8,9 @@ public class GameManager : MonoBehaviour
 {
     public static bool paused = false;
 
-    private void Awake()
-    {
-        //DontDestroyOnLoad(gameObject);
-    }
-
     public void Start()
     {
-        //continueScreenController = GetComponent<MonoScript>();
+        Resume();
     }
 
     public void LateUpdate()
