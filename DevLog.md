@@ -389,11 +389,18 @@ void LateUpdate()
 
 Last thing I did today was create a Rule Tile and make a very basic base map.
 To get a feeling and understanding for how rule tiles work, I did have to follow a tutorial ( https://www.youtube.com/watch?v=rC55Q7p90qs ) as I got very confused, but I did figure it out!
-One thing that I am a bit sad about is that I could not add variety. I originally wanted to add the trees as a varied version of the mid-tiles, but when I tried doing that, the trees were not overlaying and just had a small transparent hole, which is not pretty. But oh well, it is what it is. I might try animating the tree a tiny bit (just bouncing / swaying) to demonstrate a bit of understanding of the mechanic.
+One thing that I am a bit sad about is that I could not add variety. I originally wanted to add the trees as a varied version of the mid-tiles, but when I tried doing that, the trees were not overlaying and just had a small transparent hole, which is not pretty. But oh well, it is what it is.
 
 ### Next stepts
-- [ ] Animate trees?
 - [ ] Finish tilemap
 - [ ] Add slimes & chests
 - [ ] Make new slime variant
 - [ ] Add pushable objects
+
+
+## Update 2026/05/18
+
+### Summary and thoughts
+Today I finished the tilemap for the second level. I added the same as I did for the first; trees as decor, water as a bit of variety for the background navigability and borders. The only thing I did differently is that I cheated a tiny bit. In the previous level, when I was working on the borders, I added extra tiles to make sure that the background doesn't seem off. This time I just changed the camera's background colour. 
+Secondly, I started work on my second slime variant; the "aware" speedy slime. I created an enum first and foremost for the slime types and then I coloured over it a bit using Unity's inspector to make it a different colour.
+I haven't figured out how to implement the "avoids chests" mechanic yet.
