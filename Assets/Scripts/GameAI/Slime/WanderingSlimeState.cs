@@ -23,7 +23,7 @@ public class WanderingSlimeState : ISlimeState
         context.animationLogic.AnimateMovement(movement.x, movement.y);
     }
 
-    public void InteractWithPlayer()
+    public void InteractWith()
     {
         Vector2 distance = context.GetDistanceFromPlayer();
 

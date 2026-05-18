@@ -132,6 +132,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   player: {fileID: 0}
   speed: 1.5
+  type: 0
   anim: {fileID: 8590564596996262050}
 --- !u!61 &299894295845175098
 BoxCollider2D:
@@ -251,4 +252,4 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Size: {x: 0.16, y: 0.086240984}
-  m_EdgeRadius: 0.1
+  m_EdgeRadius: 0.2

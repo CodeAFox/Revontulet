@@ -8,6 +8,7 @@ public class SlimeController : MonoBehaviour
 {
     public Transform player;
     public float speed = 1;
+    public SlimeTypeEnum type = SlimeTypeEnum.Simple;
     public Animator anim;
     public Rigidbody2D slimeRB {get; private set;}
     public MovementAnimator animationLogic {get; private set;}
@@ -28,7 +29,7 @@ public class SlimeController : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        state.InteractWithPlayer();
+        state.InteractWith();
         state.Move();
     }
 

@@ -14,7 +14,7 @@ public class FleeingSlimeState : ISlimeState
         movement = - context.GetDistanceFromPlayer().normalized;
         context.slimeRB.MovePosition(context.slimeRB.position + movement * context.speed * Time.fixedDeltaTime);
     }
-    public void InteractWithPlayer()
+    public void InteractWith()
     {
         Vector2 distance = context.GetDistanceFromPlayer();
 
