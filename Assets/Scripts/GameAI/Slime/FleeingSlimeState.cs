@@ -18,7 +18,6 @@ public class FleeingSlimeState : ISlimeState
             movement = context.GetClosestChestDistance();
         }
 
-        //movement = - context.GetDistanceFromPlayer().normalized;
         context.slimeRB.MovePosition(context.slimeRB.position - movement.normalized * context.speed * Time.fixedDeltaTime);
     }
 
