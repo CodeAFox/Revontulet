@@ -4135,6 +4135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime1
       objectReference: {fileID: 0}
+    - target: {fileID: 5390295760675703217, guid: 12fe8ea98eb5f184e873cdf5218f435f, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -17780,7 +17784,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Size: {x: 0.16, y: 0.086240984}
-  m_EdgeRadius: 0
+  m_EdgeRadius: 0.2
 --- !u!114 &1452564222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17951,11 +17955,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3178427031402846835, guid: 804e31c488494414b8954b3c75f6cfd5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 391.4397
+      value: 392.35
       objectReference: {fileID: 0}
     - target: {fileID: 3178427031402846835, guid: 804e31c488494414b8954b3c75f6cfd5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 223.48967
+      value: 223.43
       objectReference: {fileID: 0}
     - target: {fileID: 3178427031402846835, guid: 804e31c488494414b8954b3c75f6cfd5, type: 3}
       propertyPath: m_LocalPosition.z

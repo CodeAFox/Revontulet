@@ -11,16 +11,34 @@ public class FleeingSlimeState : ISlimeState
     }
     public void Move()
     {
-        movement = - context.GetDistanceFromPlayer().normalized;
-        context.slimeRB.MovePosition(context.slimeRB.position + movement * context.speed * Time.fixedDeltaTime);
+        movement = context.GetDistanceFromPlayer();
+
+        if(context.GetClosestChestDistance().magnitude < 4 && context.type == SlimeTypeEnum.Aware)
+        {
+            movement = context.GetClosestChestDistance();
+        }
+
+        //movement = - context.GetDistanceFromPlayer().normalized;
+        context.slimeRB.MovePosition(context.slimeRB.position - movement.normalized * context.speed * Time.fixedDeltaTime);
     }
+
     public void InteractWith()
     {
         Vector2 distance = context.GetDistanceFromPlayer();
 
-        if(distance.magnitude > 2)
+        if(context.type == SlimeTypeEnum.Simple)
         {
-            context.ChangeState(new WanderingSlimeState(context));
+            if(distance.magnitude > 2)
+            {
+                context.ChangeState(new WanderingSlimeState(context));
+            }
+        }
+        else
+        {
+            if(distance.magnitude >  2 && context.GetClosestChestDistance().magnitude > 4)
+            {
+                context.ChangeState(new WanderingSlimeState(context));
+            }
         }
     }
 

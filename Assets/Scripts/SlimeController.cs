@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -48,6 +50,26 @@ public class SlimeController : MonoBehaviour
     public Vector2 GetDistanceFromPlayer()
     {
         return new Vector2(player.position.x - slimeRB.position.x, player.position.y - slimeRB.position.y);
+    }
+
+    public Vector2 GetClosestChestDistance()
+    {
+        List<GameObject> chests = GameObject.FindGameObjectsWithTag("Chest").ToList();
+
+        float minDistance = GetDistanceFromPlayer().magnitude;
+        Vector2 closestChest = GetDistanceFromPlayer();
+
+        for (int i = 0; i < chests.Count; i++)
+        {
+            Vector2 chest = new Vector2(chests[i].transform.position.x - slimeRB.position.x, chests[i].transform.position.y - slimeRB.position.y);
+            
+            if(minDistance > chest.magnitude)
+            {
+                closestChest = chest;
+                minDistance = closestChest.magnitude;
+            }
+        }
+        return closestChest;
     }
 
     public void ChangeState(ISlimeState state)
