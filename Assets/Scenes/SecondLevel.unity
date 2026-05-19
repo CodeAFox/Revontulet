@@ -244,6 +244,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 5390295760675703217, guid: 12fe8ea98eb5f184e873cdf5218f435f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2751,6 +2755,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5390295760675703217, guid: 12fe8ea98eb5f184e873cdf5218f435f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2873,6 +2881,10 @@ PrefabInstance:
     - target: {fileID: 5390295760675703217, guid: 12fe8ea98eb5f184e873cdf5218f435f, type: 3}
       propertyPath: m_Name
       value: Slime (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5390295760675703217, guid: 12fe8ea98eb5f184e873cdf5218f435f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4690,6 +4702,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpeedySlime (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1929936371894325666, guid: 87c6ed33ff5ba1646a23f7b1440883a6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8196537650179192545, guid: 87c6ed33ff5ba1646a23f7b1440883a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 412.76044
@@ -4860,7 +4876,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5390295760675703217, guid: 12fe8ea98eb5f184e873cdf5218f435f, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -20497,6 +20513,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpeedySlime (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 1929936371894325666, guid: 87c6ed33ff5ba1646a23f7b1440883a6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8196537650179192545, guid: 87c6ed33ff5ba1646a23f7b1440883a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 413.082
@@ -20766,6 +20786,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SpeedySlime
       objectReference: {fileID: 0}
+    - target: {fileID: 1929936371894325666, guid: 87c6ed33ff5ba1646a23f7b1440883a6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8196537650179192545, guid: 87c6ed33ff5ba1646a23f7b1440883a6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 411.79575
@@ -20831,6 +20855,10 @@ PrefabInstance:
     - target: {fileID: 1929936371894325666, guid: 87c6ed33ff5ba1646a23f7b1440883a6, type: 3}
       propertyPath: m_Name
       value: SpeedySlime
+      objectReference: {fileID: 0}
+    - target: {fileID: 1929936371894325666, guid: 87c6ed33ff5ba1646a23f7b1440883a6, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8196537650179192545, guid: 87c6ed33ff5ba1646a23f7b1440883a6, type: 3}
       propertyPath: m_LocalPosition.x

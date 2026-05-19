@@ -40,6 +40,6 @@ public class ContinueScreenController : MonoBehaviour
 
     public void ContinueToNextLevel()
     {
-        SceneManager.LoadScene("SecondLevel", LoadSceneMode.Single);
+        SceneManager.LoadScene(GameManager.GetNextLevel(), LoadSceneMode.Single);
     }
 }

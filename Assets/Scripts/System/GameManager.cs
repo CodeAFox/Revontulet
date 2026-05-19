@@ -45,10 +45,13 @@ public class GameManager : MonoBehaviour
 
     public static string GetNextLevel()
     {
-        List<string> scenes = EditorBuildSettings.scenes.Where(scene => scene.enabled).Select(scene => scene.path).ToList();
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
 
-        int currentScene = scenes.FindIndex(scene => scene.Equals("Assets/Scenes/" + SceneManager.GetActiveScene().name + ".unity"));
+        if(SceneManager.sceneCountInBuildSettings > ++ currentScene)
+        {
+            return SceneUtility.GetScenePathByBuildIndex(currentScene ++);
+        }
 
-        return scenes[scenes.Count == currentScene ++ ? currentScene : currentScene ++];
+        return SceneUtility.GetScenePathByBuildIndex(0);
     }
 }
