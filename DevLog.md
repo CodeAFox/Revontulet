@@ -226,6 +226,8 @@ I will have to think about states a bit more. I think it would be a good idea to
 Minor update today, I added the functionality that the slime disappears once it collides with the chest. It just gets disabled.
 Only thing that remains is the pause screen. And refactoring.
 
+# First Milestone reached
+
 ## Update 2026/05/10
 
 ### Summary and thoughts
@@ -392,10 +394,10 @@ To get a feeling and understanding for how rule tiles work, I did have to follow
 One thing that I am a bit sad about is that I could not add variety. I originally wanted to add the trees as a varied version of the mid-tiles, but when I tried doing that, the trees were not overlaying and just had a small transparent hole, which is not pretty. But oh well, it is what it is.
 
 ### Next stepts
-- [ ] Finish tilemap
-- [ ] Add slimes & chests
-- [ ] Make new slime variant
-- [ ] Add pushable objects
+- [x] Finish tilemap
+- [x] Add slimes & chests
+- [x] Make new slime variant
+- [x] Add pushable objects
 
 
 ## Update 2026/05/18
@@ -404,3 +406,28 @@ One thing that I am a bit sad about is that I could not add variety. I originall
 Today I finished the tilemap for the second level. I added the same as I did for the first; trees as decor, water as a bit of variety for the background navigability and borders. The only thing I did differently is that I cheated a tiny bit. In the previous level, when I was working on the borders, I added extra tiles to make sure that the background doesn't seem off. This time I just changed the camera's background colour. 
 Secondly, I started work on my second slime variant; the "aware" speedy slime. I created an enum first and foremost for the slime types and then I coloured over it a bit using Unity's inspector to make it a different colour.
 I haven't figured out how to implement the "avoids chests" mechanic yet.
+
+# Second Milestone reached
+
+## Update 2026/05/19
+
+### Summary and thoughts
+
+I am very happy to report that I am inching closer and closer to the finish, as I have officially reached Milestone 2!
+I started today with finishing up the new slime variant. It's unfortunately not perfect, but they do somewhat try to avoid the chests, usually making them the last ones you'd have to capture. I aslo increased their speed a bit; made them as fast as the player so it's not as easy to get the slimes to reach the chests.
+This is the method that dictates their movement;
+```
+public void Move()
+    {
+        movement = context.GetDistanceFromPlayer();
+
+        if(context.GetClosestChestDistance().magnitude < 4 && context.type == SlimeTypeEnum.Aware)
+        {
+            movement = context.GetClosestChestDistance();
+        }
+
+        context.slimeRB.MovePosition(context.slimeRB.position - movement.normalized * context.speed * Time.fixedDeltaTime);
+    }
+```
+Next, after I was done with the new variant, I made it into a prefab and added a few more along with some chests to the second level. There are approx 9 (both normal and speedy) slimes on the map.
+Lastly, I added a crate object. Its sprite is from the same sprite sheet as the chest. //TO BE CONTINUED
