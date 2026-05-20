@@ -3,27 +3,27 @@ using UnityEngine;
 public class ChestController : MonoBehaviour
 {
     public Animator anim;
+    public BoxCollider2D boxCollider {get; private set;}
 
-    private BoxCollider2D boxCollider;
+    private IChestState state;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         boxCollider = GetComponent<BoxCollider2D>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        state = new EmptyChestState(this);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Target"))
         {
-            boxCollider.enabled = false;
-            anim.SetBool("slime_captured", true);
+            state.Capture();
         }
+    }
+
+    public void ChangeState(IChestState state)
+    {
+        this.state = state;
     }
 }

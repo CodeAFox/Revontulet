@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -7,68 +10,76 @@ public class SlimeController : MonoBehaviour
 {
     public Transform player;
     public float speed = 1;
-    private Rigidbody2D slimeRB;
-    private Vector2 movement;
-    private float timer;
+    public SlimeTypeEnum type = SlimeTypeEnum.Simple;
+    public Animator anim;
+    public Rigidbody2D slimeRB {get; private set;}
+    public MovementAnimator animationLogic {get; private set;}
+    private ISlimeState state;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         slimeRB = GetComponent<Rigidbody2D>();
+         
         slimeRB.position = SpawnAwayFromPlayer(player, 3);
-
         transform.GetComponent<Rigidbody2D>().freezeRotation = true;
 
-        movement = Random.insideUnitCircle.normalized;
+        animationLogic = new MovementAnimator(anim, slimeRB.gameObject);
+        state = new WanderingSlimeState(this);
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        timer -= Time.deltaTime;
-        
-        slimeRB.MovePosition(slimeRB.position + movement * speed * Time.fixedDeltaTime);
-
-        if(timer <= 0)
-        {
-            ChangeMovement();
-            timer = Random.Range(1, 5);
-        }
-
-        RunFromPlayer(player);
+        state.InteractWith();
+        state.Move();
     }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Border"))
         {
-            movement = -movement;
+            state.Collision();
         }
         if(collision.gameObject.CompareTag("Chest"))
         {
-            slimeRB.gameObject.SetActive(false);
+            state.Captured();
         }
     }
 
-    private void ChangeMovement()
+    public Vector2 GetDistanceFromPlayer()
     {
-        movement = Random.insideUnitCircle.normalized;
+        return new Vector2(player.position.x - slimeRB.position.x, player.position.y - slimeRB.position.y);
     }
 
-    private void RunFromPlayer(Transform player)
+    public Vector2 GetClosestChestDistance()
     {
-        Vector2 distance = new Vector2(player.position.x - slimeRB.position.x, player.position.y - slimeRB.position.y);
+        List<GameObject> chests = GameObject.FindGameObjectsWithTag("Chest").ToList();
 
-        if(distance.magnitude < 2)
+        float minDistance = GetDistanceFromPlayer().magnitude;
+        Vector2 closestChest = GetDistanceFromPlayer();
+
+        for (int i = 0; i < chests.Count; i++)
         {
-            movement = - distance.normalized;
+            Vector2 chest = new Vector2(chests[i].transform.position.x - slimeRB.position.x, chests[i].transform.position.y - slimeRB.position.y);
+            
+            if(minDistance > chest.magnitude)
+            {
+                closestChest = chest;
+                minDistance = closestChest.magnitude;
+            }
         }
+        return closestChest;
     }
 
-    // Should be moved to a parent class to be used by other enemies too
+    public void ChangeState(ISlimeState state)
+    {
+        this.state = state;
+    }
+
     private Vector2 SpawnAwayFromPlayer(Transform player, int magnitude)
     {
-        Vector2 randVector = Random.insideUnitCircle.normalized * magnitude;
+        Vector2 randVector = UnityEngine.Random.insideUnitCircle.normalized * magnitude;
         return new Vector2(player.position.x + randVector.x, player.position.y + randVector.y);
     }
 }

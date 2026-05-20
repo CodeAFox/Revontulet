@@ -112,7 +112,7 @@ Now. Onto the issues. I think I might have to abandon the "cozy puzzle game" tha
 I do have another idea that could be executed, especially with the setup I have now, and the requirements alltogether; I could make a game that involves chasing targets around and collecting them. I could add obstacles that spontaneously appear, movable objects that the character would have to push strategically to trap the targets. And on top of all of this, this would mean that I have to add target AI, as well as a few prefabs for them. I think I am early on enough in the development that this change would not impact my progress by a lot. And it's not the worst idea either.
 
 ### Next steps
-- [ ] Update Game Design Document
+- [x] Update Game Design Document
 - [x] Add targets to Intro Level
 
 
@@ -143,7 +143,7 @@ I did come up with what the next checkpoint for the game could be. I want to add
 As for the first checkpoint, I will be sure to finish it and and the Dev Post by the end of this week (2026/05/03).
 
 ### Next steps
-- [ ] Update Game Design Document
+- [x] Update Game Design Document
 
 ## Update 2026/05/01
 
@@ -226,6 +226,8 @@ I will have to think about states a bit more. I think it would be a good idea to
 Minor update today, I added the functionality that the slime disappears once it collides with the chest. It just gets disabled.
 Only thing that remains is the pause screen. And refactoring.
 
+# First Milestone reached
+
 ## Update 2026/05/10
 
 ### Summary and thoughts
@@ -240,3 +242,193 @@ Next up, I added the animation to the chests, so that they close and bounce a bi
 I also added two more slimes and chests, to complete the first level's requirements.
 Next up, I had to find out when I was adding the other slimes and chests, that I had NOT been editing theprefab itself, so I had to go back and apply some changes made to the prefab, so that they would behave uniformly.
 Lasly, I added a more or less functional pause screen following a tutorial ( https://www.youtube.com/watch?v=JivuXdrIHK0 ). I did note that this tutorial was not making it keyboard-only friendly, so I looked up a different one ( https://www.youtube.com/watch?v=SXBgBmUcTe0 ) to fix that as well. But other than that, the pause menu has a functional resume button and a (hopefully) functional quit button.
+
+## Update 2026/05/12
+
+### Summary and thoughts
+
+I started refactoring today. Not much yet unfortunately, but it's alright.
+I made a State Machine for the Chests, so now they have two distinct behaviours: empty and full.
+I originally wanted to make the chests and slimes into an observer pattern, however, I had to realise that if all slimes were to receive the event of "SlimeCaptured" at the same time, that would not be too good, so I just kept it as is for now.
+
+### Next stepts
+- [x] Break up player and slime controller
+
+
+## Update 2026/05/13
+
+### Summary and thoughts
+
+Today I finished refactoring.
+First important thing I did, was separate the Animated parts off of the PlayerController, and move them into a different class called MovementAnimator.cs. This class is responsible for the turn animation that both the slime and the player have, so I added it to both.
+Simply put, in the constructor of the class, I give reference to the calling object, and its animator, allowing a separation of responsibilities for the Controller and the Animator.
+```
+public MovementAnimator(Animator anim, GameObject objectToAnimate)
+    {
+        this.anim = anim;
+        gameObject = objectToAnimate;
+    }
+```
+From the Controllers, I call the methods of the animator normally whenever needed;
+```
+void OnMove(InputValue movementValue)
+    {
+        Vector2 movementVector = movementValue.Get<Vector2>();
+
+        movementX = movementVector.x;
+        movementY = movementVector.y;
+
+        animationLogic.AnimateMovement(movementX, movementY);
+    }
+```
+
+Next thing I did was make the SlimeController a few states, these being fleeing and wandering. I had to realise that as of now "captured" is not exaclty a valid state as the game object just gets disabled.
+The part I like the most is how much I managed to cut the code down in the controller, take the FixedUpdate method for example;
+```
+void FixedUpdate()
+    {
+        state.InteractWithPlayer();
+        state.Move();
+    }
+```
+That's it. It's so beautifully simple, as the State Machine takes care of any other thing going on in the background.
+```
+public void Move()
+    {
+        if(timer <= 0)
+        {
+            movement = Random.insideUnitCircle.normalized;
+            timer = Random.Range(1, 5);
+        }
+
+        timer -= Time.deltaTime;
+
+        context.slimeRB.MovePosition(context.slimeRB.position + movement * context.speed * Time.fixedDeltaTime);
+        context.animationLogic.AnimateMovement(movement.x, movement.y);
+    }
+```
+In addition, I did a little fun thing.
+Previously, the slime would escape in the exact opposite direction it came from when it bounced back from the walls. Now, because I wanted to make it a bit different per states, I made it so that when the slime is in a fleeing state, it does what was previously stated, but if not, it just starts going in th direction where the player is currently at.
+When wandering:
+```
+public void Collision()
+    {
+        movement = context.GetDistanceFromPlayer().normalized;
+    }
+```
+And when fleeing:
+```
+public void Collision()
+    {
+        movement = -movement;
+    }
+```
+
+Lastly, I started working on the next level. For ease of transfer I actually made a lot of the first scene into prefabs. I am unsure if that was a wise decision or not, but we shall see.
+
+## Update 2026/05/15
+
+### Summary and thoughts
+No push yer today, but I did do a few things. First, I reverted my prefabs, because I read that you can persist Game Objects using DontDestroyOnLoad, so I am trying that one.
+I added another panel for the ContinueGame screen, not yet functional.
+What I am currently suffering with is trying to get the eventlistener functioning for the SlimeController and GameManager as I want the game to automatically activate the "Continue to next level?" screen once all slimes are captured.
+The singleton pattern is not yet working and I am not yet sure how to fix it. I'm trying with a SriptableObject as a sub-component. Hopefully that will work, but I am not yet sure.
+
+## Update 2026/05/16
+
+### Summary and thoughts
+Today I made the ContinueScreen pop up. As I was thinking I realised I don't really need the Observer pattern for this, so I went with the simpler, albeit probably a bit less nicer approach; I check the number of slimes inside the ContinueScreenController in a LateUpdate.
+```
+void LateUpdate()
+    {
+        int  slimesInCurrentLevel = GameManager.GetNumOfActiveSlimesOnLevel();
+        if(slimesInCurrentLevel <= 0)
+        {
+            ActivateContinueScreen();
+        }
+    }
+```
+I chose LateUpdate, because I want to make sure that it appears after all slimes are caught. I know that would probably be the case anyways, but this made more sense to me.
+
+Currently, there are two iisues. When I try to get the next level (Scene) using SceneManager, it seems it only returns the current active scene which is not optimal.
+```
+public static Scene GetNextLevel()
+    {
+        //Throws an error as it only returns one scene????
+        return SceneManager.GetSceneAt(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+```
+And secondly, for some reason the ContinueScreen, while selects the first button (being the Continue one), but does not seem like it allows that to be changed. I am not yet sure why, I will have to revisit the tutorial and see if there was any steps I missed.
+
+## Update 2026/05/17
+
+### Summary and thoughts
+
+So, I fixed the two previous problems! One of them was less obvious than the other.
+About the scene switching; since SceneManager only returned one when I was requesting all scenes, I had to turn to EditorBuildSettings to get the scene paths.
+```
+public static string GetNextLevel()
+    {
+        List<string> scenes = EditorBuildSettings.scenes.Where(scene => scene.enabled).Select(scene => scene.path).ToList();
+
+        int currentScene = scenes.FindIndex(scene => scene.Equals("Assets/Scenes/" + SceneManager.GetActiveScene().name + ".unity"));
+
+        return scenes[scenes.Count == currentScene ++ ? currentScene : currentScene ++];
+    }
+```
+I just call this from ContinueScreenController and load  the next scene.
+As for the "cannot select other button" issue... I was just a bit silly. I kept reselecting it in the LateUpdate method, so now in the if statement, I also check if the game is paused or not already.
+```
+void LateUpdate()
+    {
+        int  slimesInCurrentLevel = GameManager.GetNumOfActiveSlimesOnLevel();
+        if(slimesInCurrentLevel <= 0 && !GameManager.paused)
+        {
+            ActivateContinueScreen();
+        }
+    }
+```
+
+Last thing I did today was create a Rule Tile and make a very basic base map.
+To get a feeling and understanding for how rule tiles work, I did have to follow a tutorial ( https://www.youtube.com/watch?v=rC55Q7p90qs ) as I got very confused, but I did figure it out!
+One thing that I am a bit sad about is that I could not add variety. I originally wanted to add the trees as a varied version of the mid-tiles, but when I tried doing that, the trees were not overlaying and just had a small transparent hole, which is not pretty. But oh well, it is what it is.
+
+### Next stepts
+- [x] Finish tilemap
+- [x] Add slimes & chests
+- [x] Make new slime variant
+- [x] Add pushable objects
+
+
+## Update 2026/05/18
+
+### Summary and thoughts
+Today I finished the tilemap for the second level. I added the same as I did for the first; trees as decor, water as a bit of variety for the background navigability and borders. The only thing I did differently is that I cheated a tiny bit. In the previous level, when I was working on the borders, I added extra tiles to make sure that the background doesn't seem off. This time I just changed the camera's background colour. 
+Secondly, I started work on my second slime variant; the "aware" speedy slime. I created an enum first and foremost for the slime types and then I coloured over it a bit using Unity's inspector to make it a different colour.
+I haven't figured out how to implement the "avoids chests" mechanic yet.
+
+# Second Milestone reached
+
+## Update 2026/05/19
+
+### Summary and thoughts
+
+I am very happy to report that I am inching closer and closer to the finish, as I have officially reached Milestone 2!
+I started today with finishing up the new slime variant. It's unfortunately not perfect, but they do somewhat try to avoid the chests, usually making them the last ones you'd have to capture. I aslo increased their speed a bit; made them as fast as the player so it's not as easy to get the slimes to reach the chests.
+This is the method that dictates their movement;
+```
+public void Move()
+    {
+        movement = context.GetDistanceFromPlayer();
+
+        if(context.GetClosestChestDistance().magnitude < 4 && context.type == SlimeTypeEnum.Aware)
+        {
+            movement = context.GetClosestChestDistance();
+        }
+
+        context.slimeRB.MovePosition(context.slimeRB.position - movement.normalized * context.speed * Time.fixedDeltaTime);
+    }
+```
+Next, after I was done with the new variant, I made it into a prefab and added a few more along with some chests to the second level. There are approx 9 (both normal and speedy) slimes on the map.
+Lastly, I added a crate object. Its sprite is from the same sprite sheet as the chest. I had to mess around with its mass and linear damping (basically meaning friction) to make sure the slimes cannot push it aroud easily. After that was done, I added it as a prefab and dublicated it.
+I also made sure to put the crate object inside a parent object, because that makes disabling and enabling it a lot easier in case I need that in the future. I wish I realised that earlier.

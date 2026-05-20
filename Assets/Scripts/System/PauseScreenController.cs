@@ -4,10 +4,9 @@ using UnityEngine.EventSystems;
 
 public class PauseScreenController : MonoBehaviour
 {
-    public static bool paused = false;
     public GameObject pauseScreen;
 
-    public GameObject resumeButton;
+    public GameObject firstSelected;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -20,7 +19,7 @@ public class PauseScreenController : MonoBehaviour
     {
         if(Input.GetButtonDown("Cancel"))
         {
-            if(paused)
+            if(GameManager.paused)
             {
                 Resume();
             }
@@ -34,18 +33,17 @@ public class PauseScreenController : MonoBehaviour
     private void Pause()
     {
         pauseScreen.SetActive(true);
-        Time.timeScale = 0f;
-        paused = true;
+
+        GameManager.Pause();
 
         EventSystem.current.SetSelectedGameObject(null);
-        EventSystem.current.SetSelectedGameObject(resumeButton);
+        EventSystem.current.SetSelectedGameObject(firstSelected);
     }
 
     public void Resume()
     {
         pauseScreen.SetActive(false);
-        Time.timeScale = 1f;
-        paused = false;
+        GameManager.Resume();
     }
 
     public void EnterSettings()
@@ -55,6 +53,6 @@ public class PauseScreenController : MonoBehaviour
 
     public void QuitGame()
     {
-        Application.Quit();
+        GameManager.QuitGame();
     }
 }
