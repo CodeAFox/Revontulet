@@ -27,9 +27,19 @@ public class WanderingSlimeState : ISlimeState
     {
         Vector2 distance = context.GetDistanceFromPlayer();
 
-        if(distance.magnitude < 2)
+        if(context.type == SlimeTypeEnum.Simple)
         {
-            context.ChangeState(new FleeingSlimeState(context));
+            if(distance.magnitude < 2)
+            {
+                context.ChangeState(new FleeingSlimeState(context));
+            }
+        }
+        else
+        {
+            if(distance.magnitude <  2 && context.GetClosestChestDistance().magnitude < 4)
+            {
+                context.ChangeState(new FleeingSlimeState(context));
+            }
         }
     }
 
