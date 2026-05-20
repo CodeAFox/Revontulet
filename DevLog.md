@@ -430,4 +430,5 @@ public void Move()
     }
 ```
 Next, after I was done with the new variant, I made it into a prefab and added a few more along with some chests to the second level. There are approx 9 (both normal and speedy) slimes on the map.
-Lastly, I added a crate object. Its sprite is from the same sprite sheet as the chest. //TO BE CONTINUED
+Lastly, I added a crate object. Its sprite is from the same sprite sheet as the chest. I had to mess around with its mass and linear damping (basically meaning friction) to make sure the slimes cannot push it aroud easily. After that was done, I added it as a prefab and dublicated it.
+I also made sure to put the crate object inside a parent object, because that makes disabling and enabling it a lot easier in case I need that in the future. I wish I realised that earlier.
