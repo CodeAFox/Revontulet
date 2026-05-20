@@ -36,7 +36,7 @@ public class WanderingSlimeState : ISlimeState
         }
         else
         {
-            if(distance.magnitude <  2 && context.GetClosestChestDistance().magnitude < 4)
+            if(distance.magnitude <  2 || context.GetClosestChestDistance().magnitude < 4)
             {
                 context.ChangeState(new FleeingSlimeState(context));
             }
