@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,14 +9,17 @@ public class PlayerController : MonoBehaviour
     private float movementX;
     private float movementY;
     private MovementAnimator animationLogic;
+    private AudioSource audioSource;
 
     public Animator anim;
     public float speed = 0;
+    public List<AudioClip> audios;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         
         transform.GetComponent<Rigidbody2D>().freezeRotation = true;
         animationLogic = new MovementAnimator(anim, player.gameObject);
