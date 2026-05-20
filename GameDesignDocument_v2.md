@@ -27,5 +27,11 @@ Current list of assets:
 Further assets to be added will include a calm, but upbeat background music, as well as indicator sounds for when a slime gets into position.
 
 ### Milestones
-1. An intro level with the most basic mechanics; 3 slimes, 6 - 8 blocks for pushing and 3 resting places. Furthermore, a pause menu.
-2. A second level with more slimes, potentially a new slime variant, that does not wish to go back to its place, making the chase even more difficult.
+1. I'd like to have at least an introduction level with a pause menu, with basic mechanics. The game should have a player object with a walking and an idle animation.  
+Basic mechanics include having 3 slimes and 3 chests; the slimes (also animated sprites) can be chased around by the player and upon entering the chest they are "captured". One chest can only contain one slime and upon capture they close and become animated to signify that it's already occupied.
+Additionally, the game should have a pause menu with at least a functional resume button.
+
+2. The second milestone includes a 2nd level. This level should have some of the basic targets, while also introducing a new variant to the basic slime target. This should be a bit faster and should actively try to avoid the chests. To compensate for this added difficulty, the level should have movable objects (only movable by the player) so that the player can force and push the slimes into the chests. 
+Lastly, the code should be optimized and refactored for this milestone to be considered "completed".
+
+3. For the last milestone, optimization and making things look and sound better should be the focus. For this milestone, sounds (at the very least background music, but if time permits, walking sounds for the player as well as slime and chest) should be added as well as a settings menu where the volume can be adjusted.
