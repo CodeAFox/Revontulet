@@ -437,7 +437,9 @@ I also made sure to put the crate object inside a parent object, because that ma
 ## Update 2026/05/20
 
 ### Summary and thoughts
-Today I added sounds. The player makes noise when they move, and so do the slimes.
+Today I added sounds.
+First, I added background music ( https://assetstore.unity.com/packages/audio/music/voyage-of-visions-303570 ).
+The player makes noise when they move, and so do the slimes ( https://assetstore.unity.com/packages/audio/sound-fx/foley/footsteps-essentials-189879 ).
 They both use a simple check to do so;
 ```
 if(Vector2.Distance(transform.position, position) > minDistance)
