@@ -432,3 +432,23 @@ public void Move()
 Next, after I was done with the new variant, I made it into a prefab and added a few more along with some chests to the second level. There are approx 9 (both normal and speedy) slimes on the map.
 Lastly, I added a crate object. Its sprite is from the same sprite sheet as the chest. I had to mess around with its mass and linear damping (basically meaning friction) to make sure the slimes cannot push it aroud easily. After that was done, I added it as a prefab and dublicated it.
 I also made sure to put the crate object inside a parent object, because that makes disabling and enabling it a lot easier in case I need that in the future. I wish I realised that earlier.
+
+
+## Update 2026/05/20
+
+### Summary and thoughts
+Today I added sounds. The player makes noise when they move, and so do the slimes.
+They both use a simple check to do so;
+```
+if(Vector2.Distance(transform.position, position) > minDistance)
+        {
+            audioSource.Play();
+            position = transform.position;
+        }
+```
+Originally I just wanted to loop the audio for the slimes, but... they all just played at the same time and it got annoying, so I decided to add this for them too. 
+I also did a lot of adjusting. I have no idea why spatial sounds don't work, but I couldn't get them to function. Oh well.
+Maybe I could add a collection sound when a slime gets captured?
+
+### Next stepts
+- [ ] Add sound effect to when a slime gets captured?
