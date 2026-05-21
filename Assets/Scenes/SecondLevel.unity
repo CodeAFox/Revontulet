@@ -363,6 +363,14 @@ PrefabInstance:
       propertyPath: m_BackGroundColor.r
       value: 0.45098042
       objectReference: {fileID: 0}
+    - target: {fileID: 3361053930905012903, guid: 1d5f0e14480e5c04595d737117ff78ed, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 3361053930905012903, guid: 1d5f0e14480e5c04595d737117ff78ed, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.81
+      objectReference: {fileID: 0}
     - target: {fileID: 3679423411817877996, guid: 1d5f0e14480e5c04595d737117ff78ed, type: 3}
       propertyPath: m_Name
       value: PersistingGameAssets
