@@ -133,19 +133,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   anim: {fileID: 5999597980480909678}
   speed: 3
-  audios:
-  - {fileID: 8300000, guid: 05c42e498b8744744ad3fbf2055f3624, type: 3}
-  - {fileID: 8300000, guid: d82fc2cd4d9eb384ba34b3dc326990d9, type: 3}
-  - {fileID: 8300000, guid: 2c90e80473cc930448770f8a996062cb, type: 3}
-  - {fileID: 8300000, guid: 2efc5e4bb7b00ae4cbf739f7a1a4c3ff, type: 3}
-  - {fileID: 8300000, guid: 50dae6ac2eee7894fb8b48c192a50802, type: 3}
-  - {fileID: 8300000, guid: f80636348148ff84095ac896bff66d1c, type: 3}
-  - {fileID: 8300000, guid: c8a70ba7587aebd46a56ebb8006262f1, type: 3}
-  - {fileID: 8300000, guid: 8434b482ddca5934d813b9de555ff4ab, type: 3}
-  - {fileID: 8300000, guid: 0c1712eebdb3af2438eb4cd93140acc0, type: 3}
-  - {fileID: 8300000, guid: bf5c0a922b0cd2347a738c1d0f1a782a, type: 3}
-  - {fileID: 8300000, guid: 7f3ebf527276b484e8edae7846d33119, type: 3}
-  - {fileID: 8300000, guid: 3e069d60195c9de4a9f7765557397f30, type: 3}
 --- !u!50 &4208223761215186773
 Rigidbody2D:
   serializedVersion: 5
@@ -260,7 +247,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: f80636348148ff84095ac896bff66d1c, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
