@@ -453,4 +453,37 @@ I also did a lot of adjusting. I have no idea why spatial sounds don't work, but
 Maybe I could add a collection sound when a slime gets captured?
 
 ### Next stepts
-- [ ] Add sound effect to when a slime gets captured?
+- [ ] ~Add sound effect to when a slime gets captured?~
+
+## Update 2026/05/21
+
+### Summary and thoughts
+I had quite a few issues today, I did solve everything, but ho boi, it was not pretty what went down.
+I successfully added a settings menu to te game that sets the volume lower / higher and can use the keyboard only. I followed a tutorial ( https://www.youtube.com/watch?v=V_Bf__ynKLE&t=139s ) to get it done. To be honest, this part worked quite well.
+The issue came when I wanted to update the menu for both levels; I tried to update the prefab, but I failed in a way that reset almost everything. It wasn't a lost cause, but that was quite painful to sit through. I couldn't revert everything either, because I forgot to commit my last functional version to Git. Lesson learned.
+In any case, I got it working. The method that is used to switch between the Pause and Settings menu is really crude however.
+I added two public static variables to GameManager that PauseScreenController and ContinueScreenController can reach.
+```
+public static bool activatePause = false;
+public static bool activateSettings = false;
+```
+When they switch, they check if they need to be activated in Update, and if they do, they set themselves up.
+```
+void Update()
+    {
+        if(GameManager.activateSettings == true)
+        {
+            ActivateSettingsScreen();
+        }
+    }
+```
+```
+public void ActivateSettingsScreen()
+    {
+        GameManager.activateSettings = false;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(firstSelected);
+    }
+```
+This is approximetely the same in PauseScreenController too.
+Only thing left to do is refactoring.
