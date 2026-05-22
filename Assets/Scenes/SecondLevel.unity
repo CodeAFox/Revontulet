@@ -419,6 +419,10 @@ PrefabInstance:
       propertyPath: settingsScreen
       value: 
       objectReference: {fileID: 104993854}
+    - target: {fileID: 4741289127792511962, guid: 74438ca9780dcda4d926a4622573b233, type: 3}
+      propertyPath: OutputAudioMixerGroup
+      value: 
+      objectReference: {fileID: -1085323549716911082, guid: 79fa758592f87784e8130549587c964c, type: 2}
     - target: {fileID: 5289039509749395318, guid: 74438ca9780dcda4d926a4622573b233, type: 3}
       propertyPath: m_Name
       value: PersistingGameAssets Variant
@@ -440,7 +444,9 @@ PrefabInstance:
       value: BackToPauseMenu
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5585689719998515207, guid: 74438ca9780dcda4d926a4622573b233, type: 3}
+    - {fileID: 6487867755123925991, guid: 74438ca9780dcda4d926a4622573b233, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 74438ca9780dcda4d926a4622573b233, type: 3}
