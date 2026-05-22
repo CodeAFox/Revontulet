@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static bool paused = false;
+    public static bool activatePause = false;
+    public static bool activateSettings = false;
 
     public void Start()
     {
