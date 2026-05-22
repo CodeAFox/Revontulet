@@ -20,7 +20,6 @@ public class SettingsScreenController : MonoBehaviour
         if(GameManager.activateSettings == true)
         {
             ActivateSettingsScreen();
-            GameManager.activateSettings = false;
         }
     }
 
