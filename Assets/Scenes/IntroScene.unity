@@ -25195,7 +25195,7 @@ PrefabInstance:
     - target: {fileID: 4268271876529256739, guid: 12fe8ea98eb5f184e873cdf5218f435f, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1915224473}
+      objectReference: {fileID: 1315736577}
     - target: {fileID: 5390295760675703217, guid: 12fe8ea98eb5f184e873cdf5218f435f, type: 3}
       propertyPath: m_Name
       value: Slime3
@@ -26837,6 +26837,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3178427031402846835, guid: 804e31c488494414b8954b3c75f6cfd5, type: 3}
   m_PrefabInstance: {fileID: 1004250720}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1315736577 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8231702242859984034, guid: 74438ca9780dcda4d926a4622573b233, type: 3}
+  m_PrefabInstance: {fileID: 1779606424033670924}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1356939108 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3178427031402846835, guid: 804e31c488494414b8954b3c75f6cfd5, type: 3}
@@ -27419,7 +27424,7 @@ PrefabInstance:
     - target: {fileID: 4268271876529256739, guid: 12fe8ea98eb5f184e873cdf5218f435f, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1915224473}
+      objectReference: {fileID: 1315736577}
     - target: {fileID: 5390295760675703217, guid: 12fe8ea98eb5f184e873cdf5218f435f, type: 3}
       propertyPath: m_Name
       value: Slime2
@@ -27441,11 +27446,6 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1369286142361996308, guid: 12fe8ea98eb5f184e873cdf5218f435f, type: 3}
   m_PrefabInstance: {fileID: 1801760265}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &1915224473 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6110643410714063933, guid: 74438ca9780dcda4d926a4622573b233, type: 3}
-  m_PrefabInstance: {fileID: 1779606424033670924}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1986919499 stripped
 GameObject:
@@ -28514,7 +28514,7 @@ PrefabInstance:
     - target: {fileID: 4268271876529256739, guid: 12fe8ea98eb5f184e873cdf5218f435f, type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1915224473}
+      objectReference: {fileID: 1315736577}
     - target: {fileID: 5390295760675703217, guid: 12fe8ea98eb5f184e873cdf5218f435f, type: 3}
       propertyPath: m_Name
       value: Slime1

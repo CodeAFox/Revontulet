@@ -3,11 +3,13 @@ public class WanderingSlimeState : ISlimeState
 {
     private float timer = -1;
     private SlimeController context;
+    private SlimeLogic contextLogic;
     public Vector2 movement;
     
-    public WanderingSlimeState(SlimeController context)
+    public WanderingSlimeState(SlimeController context, SlimeLogic logic)
     {
         this.context = context;
+        contextLogic = logic;
     }
     public void Move()
     {
@@ -25,20 +27,20 @@ public class WanderingSlimeState : ISlimeState
 
     public void InteractWith()
     {
-        Vector2 distance = context.GetDistanceFromPlayer();
+        Vector2 distance = contextLogic.GetDistanceFromPlayer();
 
         if(context.type == SlimeTypeEnum.Simple)
         {
             if(distance.magnitude < 2)
             {
-                context.ChangeState(new FleeingSlimeState(context));
+                context.ChangeState(new FleeingSlimeState(context, contextLogic));
             }
         }
         else
         {
-            if(distance.magnitude <  2 || context.GetClosestChestDistance().magnitude < 4)
+            if(distance.magnitude <  2 || contextLogic.GetClosestChestDistance().magnitude < 4)
             {
-                context.ChangeState(new FleeingSlimeState(context));
+                context.ChangeState(new FleeingSlimeState(context, contextLogic));
             }
         }
     }
@@ -50,6 +52,6 @@ public class WanderingSlimeState : ISlimeState
 
     public void Collision()
     {
-        movement = context.GetDistanceFromPlayer().normalized;
+        movement = contextLogic.GetDistanceFromPlayer().normalized;
     }
 }
