@@ -8,8 +8,8 @@ public class PlayerController : MonoBehaviour
     private float movementX;
     private float movementY;
     private MovementAnimator animationLogic;
+    private MovementAudio audioLogic;
     private AudioSource audioSource;
-    private Vector2 position;
 
     public Animator anim;
     public float speed = 0;
@@ -19,10 +19,11 @@ public class PlayerController : MonoBehaviour
     {
         player = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
-        position = transform.position;
         
         transform.GetComponent<Rigidbody2D>().freezeRotation = true;
+
         animationLogic = new MovementAnimator(anim, player.gameObject);
+        audioLogic = new MovementAudio(transform, audioSource);
     }
 
     // Update is called once per frame
@@ -33,11 +34,7 @@ public class PlayerController : MonoBehaviour
             new Vector2(movementX, movementY) * 
             speed * Time.fixedDeltaTime);
 
-        if(Vector2.Distance(transform.position, position) > 2)
-        {
-            audioSource.Play();
-            position = transform.position;
-        }
+        audioLogic.MovedAway(2);
     }
 
     void OnMove(InputValue movementValue)

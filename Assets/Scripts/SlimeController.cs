@@ -14,9 +14,9 @@ public class SlimeController : MonoBehaviour
     public Animator anim;
     public Rigidbody2D slimeRB {get; private set;}
     public MovementAnimator animationLogic {get; private set;}
+    private MovementAudio audioLogic;
     private ISlimeState state;
     private AudioSource audioSource;
-    private Vector2 position;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -25,10 +25,10 @@ public class SlimeController : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
          
         slimeRB.position = SpawnAwayFromPlayer(player, 3);
-        position = transform.position;
         transform.GetComponent<Rigidbody2D>().freezeRotation = true;
 
         animationLogic = new MovementAnimator(anim, slimeRB.gameObject);
+        audioLogic = new MovementAudio(transform, audioSource);
         state = new WanderingSlimeState(this);
     }
 
@@ -38,12 +38,8 @@ public class SlimeController : MonoBehaviour
         state.InteractWith();
         state.Move();
 
-        int minDistance = type == SlimeTypeEnum.Simple ? 1 : 3;
-        if(Vector2.Distance(transform.position, position) > minDistance)
-        {
-            audioSource.Play();
-            position = transform.position;
-        }
+        float minDistance = type == SlimeTypeEnum.Simple ? 1 : 3;
+        audioLogic.MovedAway(minDistance);
     }
 
     void OnTriggerEnter2D(Collider2D collision)
