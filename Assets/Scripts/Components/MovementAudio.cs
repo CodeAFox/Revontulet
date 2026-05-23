@@ -3,12 +3,12 @@ using UnityEngine;
 public class MovementAudio
 {
     private Vector2 position;
-    private Transform objectPosition;
-    private AudioSource audioSource;
+    private readonly Transform objectPosition;
+    private readonly AudioSource audioSource;
 
     public MovementAudio(Transform gameObject, AudioSource audioSource)
     {
-        this.objectPosition = gameObject;
+        objectPosition = gameObject;
         this.audioSource = audioSource;
 
         position = objectPosition.position;
