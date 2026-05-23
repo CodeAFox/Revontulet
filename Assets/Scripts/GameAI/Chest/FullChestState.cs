@@ -1,6 +1,6 @@
 public class FullChestState : IChestState
 {
-    private ChestController context;
+    private readonly ChestController context;
     public FullChestState(ChestController context)
     {
         this.context = context;

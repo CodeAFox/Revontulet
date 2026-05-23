@@ -2,8 +2,8 @@ using UnityEngine;
 public class WanderingSlimeState : ISlimeState
 {
     private float timer = -1;
-    private SlimeController context;
-    private SlimeLogic contextLogic;
+    private readonly SlimeController context;
+    private readonly SlimeLogic contextLogic;
     public Vector2 movement;
     
     public WanderingSlimeState(SlimeController context, SlimeLogic logic)
@@ -21,7 +21,7 @@ public class WanderingSlimeState : ISlimeState
 
         timer -= Time.deltaTime;
 
-        context.slimeRB.MovePosition(context.slimeRB.position + movement * context.speed * Time.fixedDeltaTime);
+        context.slimeRB.MovePosition(context.slimeRB.position + context.speed * Time.fixedDeltaTime * movement);
         context.animationLogic.AnimateMovement(movement.x, movement.y);
     }
 

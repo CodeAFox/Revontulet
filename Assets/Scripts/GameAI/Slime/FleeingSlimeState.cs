@@ -1,9 +1,8 @@
-using Unity.VisualScripting;
 using UnityEngine;
 public class FleeingSlimeState : ISlimeState
 {
-    private SlimeController context;
-    private SlimeLogic contextLogic;
+    private readonly SlimeController context;
+    private readonly SlimeLogic contextLogic;
     private Vector2 movement;
     
     public FleeingSlimeState(SlimeController context, SlimeLogic logic)
@@ -20,7 +19,7 @@ public class FleeingSlimeState : ISlimeState
             movement = contextLogic.GetClosestChestDistance();
         }
 
-        context.slimeRB.MovePosition(context.slimeRB.position - movement.normalized * context.speed * Time.fixedDeltaTime);
+        context.slimeRB.MovePosition(context.slimeRB.position - context.speed * Time.fixedDeltaTime * movement.normalized);
     }
 
     public void InteractWith()
