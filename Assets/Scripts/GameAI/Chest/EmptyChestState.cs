@@ -9,7 +9,7 @@ public class EmptyChestState : IChestState
 
     public void Capture()
     {
-        context.boxCollider.enabled = false;
+        context.BoxCollider.enabled = false;
         context.anim.SetBool(StateParam, true);
 
         context.ChangeState(new FullChestState(context));

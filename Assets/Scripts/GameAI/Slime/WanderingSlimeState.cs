@@ -21,8 +21,8 @@ public class WanderingSlimeState : ISlimeState
 
         timer -= Time.deltaTime;
 
-        context.slimeRB.MovePosition(context.slimeRB.position + context.speed * Time.fixedDeltaTime * movement);
-        context.animationLogic.AnimateMovement(movement.x, movement.y);
+        context.SlimeRB.MovePosition(context.SlimeRB.position + context.speed * Time.fixedDeltaTime * movement);
+        context.AnimationLogic.AnimateMovement(movement.x, movement.y);
     }
 
     public void InteractWith()
@@ -47,7 +47,7 @@ public class WanderingSlimeState : ISlimeState
 
     public void Captured()
     {
-        context.slimeRB.gameObject.SetActive(false);
+        context.SlimeRB.gameObject.SetActive(false);
     }
 
     public void Collision()

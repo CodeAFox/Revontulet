@@ -19,7 +19,7 @@ public class FleeingSlimeState : ISlimeState
             movement = contextLogic.GetClosestChestDistance();
         }
 
-        context.slimeRB.MovePosition(context.slimeRB.position - context.speed * Time.fixedDeltaTime * movement.normalized);
+        context.SlimeRB.MovePosition(context.SlimeRB.position - context.speed * Time.fixedDeltaTime * movement.normalized);
     }
 
     public void InteractWith()
@@ -44,7 +44,7 @@ public class FleeingSlimeState : ISlimeState
 
     public void Captured()
     {
-        context.slimeRB.gameObject.SetActive(false);
+        context.SlimeRB.gameObject.SetActive(false);
     }
 
     public void Collision()

@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.AI;
+
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 
 public class SlimeController : MonoBehaviour
 {
@@ -12,8 +9,10 @@ public class SlimeController : MonoBehaviour
     public float speed = 1;
     public SlimeTypeEnum type = SlimeTypeEnum.Simple;
     public Animator anim;
-    public Rigidbody2D slimeRB {get; private set;}
-    public MovementAnimator animationLogic {get; private set;}
+
+    public Rigidbody2D SlimeRB {get; private set;}
+    public MovementAnimator AnimationLogic {get; private set;}
+    
     private MovementAudio audioLogic;
     private SlimeLogic logic;
     private ISlimeState state;
@@ -22,7 +21,7 @@ public class SlimeController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        slimeRB = GetComponent<Rigidbody2D>();
+        SlimeRB = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
         
         logic = new SlimeLogic(player, gameObject);
@@ -30,7 +29,7 @@ public class SlimeController : MonoBehaviour
 
         transform.GetComponent<Rigidbody2D>().freezeRotation = true;
 
-        animationLogic = new MovementAnimator(anim, slimeRB.gameObject);
+        AnimationLogic = new MovementAnimator(anim, SlimeRB.gameObject);
         audioLogic = new MovementAudio(transform, audioSource);
         state = new WanderingSlimeState(this, logic);
     }

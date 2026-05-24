@@ -1,6 +1,8 @@
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 
 public class PlayerController : MonoBehaviour
 {
@@ -31,8 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         player.MovePosition(
             player.position + 
-            new Vector2(movementX, movementY) * 
-            speed * Time.fixedDeltaTime);
+            speed * Time.fixedDeltaTime * new Vector2(movementX, movementY));
 
         audioLogic.MovedAway(2);
     }
