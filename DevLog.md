@@ -487,3 +487,31 @@ public void ActivateSettingsScreen()
 ```
 This is approximetely the same in PauseScreenController too.
 Only thing left to do is refactoring.
+
+# Third Milestone reached
+
+## Update 2026/05/23
+
+### Summary and thoughts
+Today I did a bit of refactoring. Nothing too major, I mainly removed unused imports and ordered things around a bit to make readability better.
+The one big change that I did was with SlimeController. I made a SlimeLogic component that takes care of most methods not directly relating to MonoBehaviour.
+```
+public void SpawnAwayFromPlayer(int magnitude)
+    {
+        Vector2 randVector = Random.insideUnitCircle.normalized * magnitude;
+        slime.transform.position = new(player.transform.position.x + randVector.x, player.transform.position.y + randVector.y);
+    }
+```
+For example, this was originally in SlimeController, but I moved it to make the Controller smaller and more easy to see through.
+
+Furthermore, I made a component MovementAudio that is responsible for giving sound to anything moving around on the map. I added this to both the player and the slime.
+```
+public void MovedAway(float minDistance)
+    {
+        if(Vector2.Distance(objectPosition.position, position) > minDistance)
+        {
+            audioSource.Play();
+            position = objectPosition.position;
+        }
+    }
+```
