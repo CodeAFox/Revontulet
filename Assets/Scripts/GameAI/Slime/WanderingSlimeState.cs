@@ -2,12 +2,14 @@ using UnityEngine;
 public class WanderingSlimeState : ISlimeState
 {
     private float timer = -1;
-    private SlimeController context;
+    private readonly SlimeController context;
+    private readonly SlimeLogic contextLogic;
     public Vector2 movement;
     
-    public WanderingSlimeState(SlimeController context)
+    public WanderingSlimeState(SlimeController context, SlimeLogic logic)
     {
         this.context = context;
+        contextLogic = logic;
     }
     public void Move()
     {
@@ -19,37 +21,37 @@ public class WanderingSlimeState : ISlimeState
 
         timer -= Time.deltaTime;
 
-        context.slimeRB.MovePosition(context.slimeRB.position + movement * context.speed * Time.fixedDeltaTime);
-        context.animationLogic.AnimateMovement(movement.x, movement.y);
+        context.SlimeRB.MovePosition(context.SlimeRB.position + context.speed * Time.fixedDeltaTime * movement);
+        context.AnimationLogic.AnimateMovement(movement.x, movement.y);
     }
 
     public void InteractWith()
     {
-        Vector2 distance = context.GetDistanceFromPlayer();
+        Vector2 distance = contextLogic.GetDistanceFromPlayer();
 
         if(context.type == SlimeTypeEnum.Simple)
         {
             if(distance.magnitude < 2)
             {
-                context.ChangeState(new FleeingSlimeState(context));
+                context.ChangeState(new FleeingSlimeState(context, contextLogic));
             }
         }
         else
         {
-            if(distance.magnitude <  2 && context.GetClosestChestDistance().magnitude < 4)
+            if(distance.magnitude <  2 || contextLogic.GetClosestChestDistance().magnitude < 4)
             {
-                context.ChangeState(new FleeingSlimeState(context));
+                context.ChangeState(new FleeingSlimeState(context, contextLogic));
             }
         }
     }
 
     public void Captured()
     {
-        context.slimeRB.gameObject.SetActive(false);
+        context.SlimeRB.gameObject.SetActive(false);
     }
 
     public void Collision()
     {
-        movement = context.GetDistanceFromPlayer().normalized;
+        movement = contextLogic.GetDistanceFromPlayer().normalized;
     }
 }

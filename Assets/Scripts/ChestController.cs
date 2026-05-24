@@ -1,16 +1,18 @@
 using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
+
 public class ChestController : MonoBehaviour
 {
     public Animator anim;
-    public BoxCollider2D boxCollider {get; private set;}
+    public BoxCollider2D BoxCollider {get; private set;}
 
     private IChestState state;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        boxCollider = GetComponent<BoxCollider2D>();
+        BoxCollider = GetComponent<BoxCollider2D>();
         state = new EmptyChestState(this);
     }
 

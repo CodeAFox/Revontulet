@@ -1,6 +1,8 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(AudioSource))]
 
 public class PlayerController : MonoBehaviour
 {
@@ -8,6 +10,8 @@ public class PlayerController : MonoBehaviour
     private float movementX;
     private float movementY;
     private MovementAnimator animationLogic;
+    private MovementAudio audioLogic;
+    private AudioSource audioSource;
 
     public Animator anim;
     public float speed = 0;
@@ -16,9 +20,12 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         player = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         
         transform.GetComponent<Rigidbody2D>().freezeRotation = true;
+
         animationLogic = new MovementAnimator(anim, player.gameObject);
+        audioLogic = new MovementAudio(transform, audioSource);
     }
 
     // Update is called once per frame
@@ -26,12 +33,14 @@ public class PlayerController : MonoBehaviour
     {
         player.MovePosition(
             player.position + 
-            new Vector2(movementX, movementY) * 
-            speed * Time.fixedDeltaTime);
+            speed * Time.fixedDeltaTime * new Vector2(movementX, movementY));
+
+        audioLogic.MovedAway(2);
     }
 
     void OnMove(InputValue movementValue)
     {
+        audioSource.Play();
         Vector2 movementVector = movementValue.Get<Vector2>();
 
         movementX = movementVector.x;

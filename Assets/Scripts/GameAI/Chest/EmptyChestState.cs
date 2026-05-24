@@ -1,6 +1,7 @@
 public class EmptyChestState : IChestState
 {
-    private ChestController context;
+    private readonly ChestController context;
+    private readonly string StateParam = "slime_captured";
     public EmptyChestState(ChestController context)
     {
         this.context = context;
@@ -8,8 +9,8 @@ public class EmptyChestState : IChestState
 
     public void Capture()
     {
-        context.boxCollider.enabled = false;
-        context.anim.SetBool("slime_captured", true);
+        context.BoxCollider.enabled = false;
+        context.anim.SetBool(StateParam, true);
 
         context.ChangeState(new FullChestState(context));
     }

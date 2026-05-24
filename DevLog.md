@@ -432,3 +432,86 @@ public void Move()
 Next, after I was done with the new variant, I made it into a prefab and added a few more along with some chests to the second level. There are approx 9 (both normal and speedy) slimes on the map.
 Lastly, I added a crate object. Its sprite is from the same sprite sheet as the chest. I had to mess around with its mass and linear damping (basically meaning friction) to make sure the slimes cannot push it aroud easily. After that was done, I added it as a prefab and dublicated it.
 I also made sure to put the crate object inside a parent object, because that makes disabling and enabling it a lot easier in case I need that in the future. I wish I realised that earlier.
+
+
+## Update 2026/05/20
+
+### Summary and thoughts
+Today I added sounds.
+First, I added background music ( https://assetstore.unity.com/packages/audio/music/voyage-of-visions-303570 ).
+The player makes noise when they move, and so do the slimes ( https://assetstore.unity.com/packages/audio/sound-fx/foley/footsteps-essentials-189879 ).
+They both use a simple check to do so;
+```
+if(Vector2.Distance(transform.position, position) > minDistance)
+        {
+            audioSource.Play();
+            position = transform.position;
+        }
+```
+Originally I just wanted to loop the audio for the slimes, but... they all just played at the same time and it got annoying, so I decided to add this for them too. 
+I also did a lot of adjusting. I have no idea why spatial sounds don't work, but I couldn't get them to function. Oh well.
+Maybe I could add a collection sound when a slime gets captured?
+
+### Next stepts
+- [ ] ~Add sound effect to when a slime gets captured?~
+
+## Update 2026/05/21
+
+### Summary and thoughts
+I had quite a few issues today, I did solve everything, but ho boi, it was not pretty what went down.
+I successfully added a settings menu to te game that sets the volume lower / higher and can use the keyboard only. I followed a tutorial ( https://www.youtube.com/watch?v=V_Bf__ynKLE&t=139s ) to get it done. To be honest, this part worked quite well.
+The issue came when I wanted to update the menu for both levels; I tried to update the prefab, but I failed in a way that reset almost everything. It wasn't a lost cause, but that was quite painful to sit through. I couldn't revert everything either, because I forgot to commit my last functional version to Git. Lesson learned.
+In any case, I got it working. The method that is used to switch between the Pause and Settings menu is really crude however.
+I added two public static variables to GameManager that PauseScreenController and ContinueScreenController can reach.
+```
+public static bool activatePause = false;
+public static bool activateSettings = false;
+```
+When they switch, they check if they need to be activated in Update, and if they do, they set themselves up.
+```
+void Update()
+    {
+        if(GameManager.activateSettings == true)
+        {
+            ActivateSettingsScreen();
+        }
+    }
+```
+```
+public void ActivateSettingsScreen()
+    {
+        GameManager.activateSettings = false;
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(firstSelected);
+    }
+```
+This is approximetely the same in PauseScreenController too.
+Only thing left to do is refactoring.
+
+# Third Milestone reached
+
+## Update 2026/05/23
+
+### Summary and thoughts
+Today I did a bit of refactoring. Nothing too major, I mainly removed unused imports and ordered things around a bit to make readability better.
+The one big change that I did was with SlimeController. I made a SlimeLogic component that takes care of most methods not directly relating to MonoBehaviour.
+```
+public void SpawnAwayFromPlayer(int magnitude)
+    {
+        Vector2 randVector = Random.insideUnitCircle.normalized * magnitude;
+        slime.transform.position = new(player.transform.position.x + randVector.x, player.transform.position.y + randVector.y);
+    }
+```
+For example, this was originally in SlimeController, but I moved it to make the Controller smaller and more easy to see through.
+
+Furthermore, I made a component MovementAudio that is responsible for giving sound to anything moving around on the map. I added this to both the player and the slime.
+```
+public void MovedAway(float minDistance)
+    {
+        if(Vector2.Distance(objectPosition.position, position) > minDistance)
+        {
+            audioSource.Play();
+            position = objectPosition.position;
+        }
+    }
+```
