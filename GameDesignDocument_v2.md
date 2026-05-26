@@ -1,4 +1,4 @@
-# Name to be decided 
+# Slime Hearder
 
 #### Game concept
 The game will be a simple hearding game. The player plays as a siberian husky chasing down slimes so that they go back to their resting places. 
